@@ -7,6 +7,8 @@
     
     <div id="content">
         <h1>HELLO</h1>
+        <img  src="${pageContext.request.contextPath}/images/shema.jpg" width="400" height="400" />
+
     </div>
     
     <jsp:include page="footer.jsp" />  

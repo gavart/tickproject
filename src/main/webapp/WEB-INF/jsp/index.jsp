@@ -8,7 +8,7 @@
     <div id="content">
         <h1>HELLO</h1>
         <div>
-            <h2>Схема стадиона</h2>
+            <h2>Схема стадиона Черноморец</h2>
             <img src="../images/shema.jpg">
         </div>
     </div>

@@ -1,8 +1,6 @@
 package com.mycompany.tickproject.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by apple on 27.06.14.
@@ -17,6 +15,8 @@ public class Status {
     private String Status;
 
     //getters
+    @Id
+    @GeneratedValue
     @Column(name = "id")
     public int getId() {
         return id;

@@ -17,8 +17,14 @@
     
     
         <bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-		p:location="/WEB-INF/jdbc.properties" />
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+            <property name="locations">
+                <list>
+                    <value>/WEB-INF/jdbc.properties</value>
+                    <!--<value>/WEB-INF/log4j.properties</value>-->
+                </list>
+            </property>
+		</bean>
     
         <bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"

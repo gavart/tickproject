@@ -2,7 +2,7 @@ package com.mycompany.tickproject.dao;
 
 import com.mycompany.tickproject.models.Customer;
 
-/** This interface provides methods that are used to work with the entity {@link com.mycompany.tickproject.models.Customer}
+/** This interface provide methods that are used to work with the entity {@link com.mycompany.tickproject.models.Customer}
  * @author jenias
  * @version 1.0, 08/07/14
  */

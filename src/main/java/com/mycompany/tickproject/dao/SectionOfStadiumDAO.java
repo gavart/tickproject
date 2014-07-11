@@ -4,7 +4,7 @@ import com.mycompany.tickproject.models.SectionOfStadium;
 
 import java.util.List;
 
-/** This interface provides methods that are used to work with the entity {@link com.mycompany.tickproject.models.SectionOfStadium}
+/** This interface provide methods that are used to work with the entity {@link com.mycompany.tickproject.models.SectionOfStadium}
  * @author jenias
  * @version 1.0, 08/07/14
  */
@@ -15,11 +15,17 @@ public interface SectionOfStadiumDAO {
      */
     public void addSectionOfStadium(SectionOfStadium sectionOfStadium);
 
+    /** This method add list with objects of {@link com.mycompany.tickproject.models.SectionOfStadium} to the database
+     *
+     * @param listWithSectionsOfStadium list with objects of {@link com.mycompany.tickproject.models.SectionOfStadium}
+     */
+    public void addSectionsOfStadium(List<SectionOfStadium> listWithSectionsOfStadium);
+
     /** This method gets an object from the database by id and edit information about {@link com.mycompany.tickproject.models.SectionOfStadium}
      *
-     * @param id id an object of {@link com.mycompany.tickproject.models.SectionOfStadium}
+     * @param sectionOfStadium an object of {@link com.mycompany.tickproject.models.SectionOfStadium} with updated information
      */
-    public void editSectionOfStadium(int id);
+    public void editSectionOfStadium(SectionOfStadium sectionOfStadium);
 
     /** This method gets an object from the database by id and returns an object of {@link com.mycompany.tickproject.models.SectionOfStadium}
      *
@@ -33,11 +39,11 @@ public interface SectionOfStadiumDAO {
      * @param stadiumID id an object of {@link com.mycompany.tickproject.models.Stadium}
      * @return list with objects of {@link com.mycompany.tickproject.models.SectionOfStadium}
      */
-    public List<SectionOfStadiumDAO> getSectionsOfStadium(int stadiumID);
+    public List<SectionOfStadium> getSectionsOfStadium(int stadiumID);
 
-    /** This method removes an object of {@link com.mycompany.tickproject.models.SectionOfStadium} from the database by id.
+    /** This method removes an object of {@link com.mycompany.tickproject.models.SectionOfStadium} from the database
      *
-     * @param id id an object of {@link com.mycompany.tickproject.models.SectionOfStadium}
+     * @param sectionOfStadium an object of {@link com.mycompany.tickproject.models.SectionOfStadium}
      */
-    public void removeSectionOfStadium(int id);
+    public void removeSectionOfStadium(SectionOfStadium sectionOfStadium);
 }

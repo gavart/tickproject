@@ -4,7 +4,7 @@ import com.mycompany.tickproject.models.Price;
 
 import java.util.List;
 
-/** This interface provides methods that are used to work with the entity {@link com.mycompany.tickproject.models.Price}
+/** This interface provide methods that are used to work with the entity {@link com.mycompany.tickproject.models.Price}
  * @author jenias
  * @version 1.0, 08/07/14
  */

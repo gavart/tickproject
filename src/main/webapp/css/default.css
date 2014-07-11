@@ -1,0 +1,43 @@
+.site-padding{
+    overflow-x:auto;
+
+}
+
+.select-plase-box {
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:30px;
+}
+
+.select-plase-box td{
+    width: 16px; height: 16px;
+    text-align: center;
+    vertical-align: middle;
+    border: solid 1px #fff;
+    background: #dfdfdf;
+    font-size: 12px;
+    line-height: 12px;
+    cursor:pointer;
+}
+.select-plase-box td.row-title{
+    color: #bababa;
+    background: none;
+    text-align: left;
+    text-transform: uppercase;
+}
+.select-plase-box td:empty{
+    cursor:default;
+}
+
+.select-plase-box td.active{
+    background: #b1ffff;
+    color: #000;
+}
+
+.select-plase-box td.tapped {
+    background: #829AB5 !important;
+}
+
+

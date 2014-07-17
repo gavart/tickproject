@@ -36,7 +36,7 @@ public class RowAndSeatServiceImpl implements RowAndSeatService {
     @Override
     public void addRowsAndSeatsFromFile(List<RowAndSeat> listWithRowsAndSeats) {
 
-        //facadeDAO.getRowAndSeatDAO().addRowsAndSeatsFromFile(listWithRowsAndSeats);
+        facadeDAO.getRowAndSeatDAO().addRowsAndSeatsFromFile(listWithRowsAndSeats);
     }
 
     /**

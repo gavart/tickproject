@@ -12,6 +12,8 @@ public class FacadeService {
     private StadiumService stadiumService;
     private SectionOfStadiumService sectionOfStadiumService;
     private RowAndSeatService rowAndSeatService;
+    private TicketService ticketService;
+    private ActionService actionService;
 
     @Autowired
     public void setStadiumService(StadiumService stadiumService){
@@ -30,10 +32,29 @@ public class FacadeService {
 
     @Autowired
     public void setRowAndSeatService(RowAndSeatService rowAndSeatService){
+
+
+
+
         this.rowAndSeatService = rowAndSeatService;
     }
     public RowAndSeatService getRowAndSeatService() {
         return this.rowAndSeatService;
     }
 
+    @Autowired
+    public void setTicketService(TicketService ticketService) {
+        this.ticketService = ticketService;
+    }
+    public TicketService getTicketService() {
+        return ticketService;
+    }
+
+    @Autowired
+    public void setActionService(ActionService actionService) {
+        this.actionService = actionService;
+    }
+    public ActionService getActionService() {
+        return actionService;
+    }
 }

@@ -36,7 +36,7 @@ public class SectionOfStadiumServiceImpl implements SectionOfStadiumService {
     @Transactional
     @Override
     public void addSectionsOfStadium(List<SectionOfStadium> listWithSectionsOfStadium) {
-        //facadeDAO.getSectionOfStadiumDAO().addSectionsOfStadium(listWithSectionsOfStadium);
+        facadeDAO.getSectionOfStadiumDAO().addSectionsOfStadium(listWithSectionsOfStadium);
     }
 
     /**

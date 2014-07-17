@@ -8,14 +8,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Добавление секторов</title>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/default.js" charset="UTF-8"></script>
-</head>
-<body>
-    <div>
+
+<jsp:include page="header.jsp" />
+<jsp:include page="menu.jsp" />
+
+    <div id="content">
         <form:form method="post" action="${pageContext.request.contextPath}/addsection"
                    modelAttribute="sectionForm" enctype="multipart/form-data">
         <span>Стадион:
@@ -36,6 +33,6 @@
         </table>
         <br/><input type="submit" value="Загрузить" />
         </form:form>
-    </div>
-</body>
-</html>
+    </div><!--content-->
+
+<jsp:include page="footer.jsp" />

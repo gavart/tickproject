@@ -6,13 +6,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
         <title>title</title>
-        
-        
-       
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" type="text/css" />
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/default.js" charset="UTF-8"></script>
         
     </head>
- 
     <body>
+        <div id="container">
       
         
         

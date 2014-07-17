@@ -5,6 +5,7 @@ package com.mycompany.tickproject.models;
 import javax.persistence.*;
 import java.sql.Time;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by apple on 27.06.14.
@@ -16,8 +17,7 @@ public class Action {
     //properties
     private int id;
     private String nameAction;
-    private Date dateAction;
-    private Time timeAction;
+    private Timestamp dateTimeAction;
     private Stadium stadium;
     private boolean isActive;
 
@@ -25,7 +25,7 @@ public class Action {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    public int getActionID() {
+    public int getId() {
         return this.id;
     }
 
@@ -34,19 +34,14 @@ public class Action {
         return this.nameAction;
     }
 
-    @Column(name = "date_action")
-    public Date getDateAction() {
-        return this.dateAction;
-    }
-
-    @Column(name = "time_action")
-    public Time getTimeAction() {
-        return this.timeAction;
+    @Column(name = "date_time_action")
+    public Timestamp getDateTimeAction() {
+        return this.dateTimeAction;
     }
 
     @ManyToOne
     @JoinColumn(name="stadium_id")
-    public Stadium getStadiumID() {
+    public Stadium getStadium() {
         return this.stadium;
     }
 
@@ -66,19 +61,15 @@ public class Action {
         this.nameAction = nameAction;
     }
 
-    public void setDateAction(Date dateAction) {
-        this.dateAction = dateAction;
-    }
-
-    public void setTimeAction(Time timeAction) {
-        this.timeAction = timeAction;
+    public void setDateTimeAction(Timestamp dateTimeAction) {
+        this.dateTimeAction = dateTimeAction;
     }
 
     public void setStadium(Stadium stadium) {
         this.stadium = stadium;
     }
 
-    public void setActive(boolean isActive) {
+    public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
 }

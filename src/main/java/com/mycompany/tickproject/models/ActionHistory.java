@@ -23,7 +23,8 @@ public class ActionHistory {
     public int getId() {
         return id;
     }
-    @Column(name = "action_id")
+    @ManyToOne
+    @JoinColumn(name = "action_id")
     public Action getAction() {
         return action;
     }

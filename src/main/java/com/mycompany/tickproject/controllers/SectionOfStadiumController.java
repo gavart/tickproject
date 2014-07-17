@@ -1,6 +1,8 @@
 package com.mycompany.tickproject.controllers;
 
+import com.mycompany.tickproject.helper.Generation;
 import com.mycompany.tickproject.helper.RecalculationIndexes;
+import com.mycompany.tickproject.models.Action;
 import com.mycompany.tickproject.models.SectionForm;
 import com.mycompany.tickproject.models.SectionOfStadium;
 import com.mycompany.tickproject.models.Stadium;
@@ -76,4 +78,18 @@ public class SectionOfStadiumController {
 
         return "addsections_success";
     }
+
+    @RequestMapping(value = "/getsections", method = RequestMethod.GET)
+    public String getSections(HttpServletRequest request, HttpServletResponse response,Model map) throws Exception {
+        int idstadium =Integer.parseInt(request.getParameter("idstadium"));
+        int actionId = Integer.parseInt(request.getParameter("idaction"));
+        Generation generation = new Generation();
+
+        String contextPath = request.getContextPath();
+        Action action = facadeService.getActionService().getAction(actionId);
+        map.addAttribute("actionString", generation.generateOneAction(action,contextPath));
+        map.addAttribute("listSections", generation.generateSections(facadeService.getSectionOfStadiumService().getSectionsOfStadium(idstadium),contextPath,actionId)); //facadeService.getSectionOfStadiumService().getSectionsOfStadium(idstadium));//generation.generateSections(facadeService.getSectionOfStadiumService().getSectionsOfStadium(idstadium)));
+        return "showsections";
+    }
+
 }

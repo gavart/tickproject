@@ -6,6 +6,12 @@
       <mapping class="com.mycompany.tickproject.models.Stadium"/>
       <mapping class="com.mycompany.tickproject.models.RowAndSeat"/>
       <mapping class="com.mycompany.tickproject.models.SectionOfStadium"/>
+      <mapping class="com.mycompany.tickproject.models.Ticket"/>
+      <mapping class="com.mycompany.tickproject.models.Action"/>
+      <mapping class="com.mycompany.tickproject.models.Status"/>
+      <mapping class="com.mycompany.tickproject.models.Price"/>
+      <mapping class="com.mycompany.tickproject.models.ActionHistory"/>
+      <mapping class="com.mycompany.tickproject.models.Customer"/>
 
   </session-factory>
 </hibernate-configuration>

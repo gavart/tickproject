@@ -11,14 +11,13 @@
 <jsp:include page="header.jsp" />
 <jsp:include page="menu.jsp" />
 
-    <div id="content">
-        ${actionString}
-        <table class="select-section-box">
-            ${listSections}
-                <% //<c:forEach items="${listSections}" var="section">
-                    //<td data-idsection="${section.id}"><a href="${pageContext.request.contextPath}/showseats?idsection=${section.id}">Сектор №${section.name}</a></td>
-                //</c:forEach> %>
-        </table>
+    <div class="content actions">
+        <div class="transparent_div">
+            ${actionString}
+            <div class="div_sectors clearfix">
+                ${listSections}
+            </div>
+        </div>
     </div><!--content-->
 
 <jsp:include page="footer.jsp" />

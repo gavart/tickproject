@@ -40,20 +40,12 @@ public class Generation {
 
     public String generateSections(List<SectionOfStadium> list, String contextPath,int actionId) {
         StringBuilder sections = new StringBuilder();
-        sections.append("<tr>");
+        sections.append("<ul class=\"sector_number\">\n");
         int count = 1;
         for(SectionOfStadium sectionOfStadium : list) {
-            if(count == 7 ) {
-                count = 1;
-                sections.append("<td style=\"background-color:"+ sectionOfStadium.getColor() +";\" data-idsection=\""+sectionOfStadium.getId()+"\"><a href=\""+ contextPath +"/showseats?idaction="+actionId+"&idsection="+sectionOfStadium.getId()+"\">" + sectionOfStadium.getName() + "</a></td>");
-                sections.append("</tr>");
-                sections.append("<tr>");
-            } else {
-                sections.append("<td style=\"background-color:"+ sectionOfStadium.getColor() +";\" data-idsection=\""+sectionOfStadium.getId()+"\"><a href=\""+ contextPath +"/showseats?idaction="+actionId+"&idsection="+sectionOfStadium.getId()+"\">" + sectionOfStadium.getName() + "</a></td>");
-                count ++;
-            }
+            sections.append("<li style=\"background-color:"+ sectionOfStadium.getColor() +";\" data-idsection=\""+sectionOfStadium.getId()+"\"><a href=\""+ contextPath +"/showseats?idaction="+actionId+"&idsection="+sectionOfStadium.getId()+"\">" + sectionOfStadium.getName() + "</a></li>");
         }
-        sections.append("</tr>");
+        sections.append("</ul>");
         return sections.toString();
     }
 
@@ -106,7 +98,7 @@ public class Generation {
             String seat="";
 
             if(ticket.getRowAndSeat().getSeat()==0) {
-                seat = "<td class=\"row-title\"></td>";
+                seat = "<td class=\"row_title\"></td>";
             }
             else {
                 if(ticket.getStatus()== null) {
@@ -118,7 +110,7 @@ public class Generation {
             if(row1==0) {
                 row1 = ticket.getRowAndSeat().getRow();
                 paintedRowsAndSeats.append("<tr>" + "\n");
-                paintedRowsAndSeats.append("<td class=\"row-title\">"+row1+"</td>" + "\n");
+                paintedRowsAndSeats.append("<td class=\"row_title\">"+row1+"</td>" + "\n");
                 paintedRowsAndSeats.append(seat + "\n");
             }
             else if(row1 == row2) {
@@ -128,7 +120,7 @@ public class Generation {
                 row1 = ticket.getRowAndSeat().getRow();
                 paintedRowsAndSeats.append("</tr>" + "\n");
                 paintedRowsAndSeats.append("<tr>" + "\n");
-                paintedRowsAndSeats.append("<td class=\"row-title\">"+row1+"</td>" + "\n");
+                paintedRowsAndSeats.append("<td class=\"row_title\">"+row1+"</td>" + "\n");
                 paintedRowsAndSeats.append(seat + "\n");
             }
         }

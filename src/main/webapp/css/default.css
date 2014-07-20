@@ -14,7 +14,7 @@ body
 
 }
 
-.select-plase-box {
+.select_plase_box {
     border-collapse: collapse;
     margin-bottom: 10px;
     margin-left: auto;
@@ -22,42 +22,42 @@ body
     margin-top:30px;
 }
 
-.select-plase-box td{
+.select_plase_box td{
     width: 16px; height: 16px;
     text-align: center;
     vertical-align: middle;
-    border: solid 1px #fff;
+    border: solid 1px #333333;
     background: #dfdfdf;
     font-size: 12px;
     line-height: 12px;
     cursor:pointer;
 }
-.select-plase-box td.row-title{
+.select_plase_box td.row-title{
     color: #bababa;
     background: none;
     text-align: left;
     text-transform: uppercase;
 }
-.select-plase-box td:empty{
+.select_plase_box td:empty{
     cursor:default;
 }
 
-.select-plase-box td.active{
-    background: #b1ffff;
+.select_plase_box td.active{
+    background: #fff;
     color: #000;
 }
 
-.select-plase-box td.booked{
+.select_plase_box td.booked{
     background: #829AB5;
     color: #000;
 }
 
-.select-plase-box td.tapped {
+.select_plase_box td.tapped {
     background: #829AB5 !important;
 }
 
 
-.select-section-box {
+.select_section_box {
     border-collapse: collapse;
     margin-bottom: 10px;
     margin-left: auto;
@@ -65,10 +65,10 @@ body
     margin-top:30px;
 }
 
-.select-section-box td{
+.select_section_box td{
     width: 150px; height: 120px;
     text-align: center;
-    border: solid 3px #fff;
+    border: solid 1px #B4B4B4;
    /* background: #dfdfdf;*/
     font-weight: bold;
     font-size: 40px;
@@ -76,7 +76,7 @@ body
     cursor:pointer;
 
 }
-.select-section-box td a {
+.select_section_box td a {
     width: 100%;
     height: 100%;
     padding-top: 52px;
@@ -85,60 +85,32 @@ body
     text-decoration: none;
     color:#000000;
 }
-.select-section-box td a:hover{
+.select_section_box td a:hover{
     color: orangered;
     border-bottom: 3px solid deepskyblue;
 }
-.select-section-box td a:active{
+.select_section_box td a:active{
     color: deepskyblue;
     border-bottom: 3px solid orangered;
 
 }
-
-
 #actions {
     margin-left: 0;
     padding-left: 0;
 }
-#actions li{
-    list-style-type: none;
-    margin-top: 10px;
 
-    text-align: center;
-    border: solid 1px darkred;
-
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 20px;
-    cursor:pointer;
-}
-#actions li a {
-    text-decoration: none;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: #dfdfdf;
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-#actions li a:hover{
-    background-color: darkgray;
-}
 .nameAction {
-    padding-top: 10px;
     font-size: 30px;
     color:saddlebrown;
 }
 #oneAction {
-    margin-top: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: center;
     border: solid 1px darkred;
-
+    border-radius: 20px;
     font-weight: bold;
     font-size: 20px;
     line-height: 20px;
-    background-color: #dfdfdf;
-
+    background-color: rgba(255, 255, 255, 0.7);
 }

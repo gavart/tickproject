@@ -8,6 +8,8 @@
         <title>title</title>
         <!--<link href='http://fonts.googleapis.com/css?family=Lemon' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Roboto:300&subset=cyrillic-ext,latin' rel='stylesheet' type='text/css'>-->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/normalize.css" type="text/css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" type="text/css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" type="text/css" />
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/default.js" charset="UTF-8"></script>

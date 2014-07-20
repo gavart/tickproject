@@ -14,7 +14,7 @@ public class SectionOfStadium {
     private String name;
     private String description;
     private Stadium stadium;
-
+    private String color;
 
 
     //getters
@@ -40,6 +40,11 @@ public class SectionOfStadium {
         return stadium;
     }
 
+    @Column(name = "color")
+    public String getColor() {
+        return color;
+    }
+
     //setters
     public void setId(int id) {
         this.id = id;
@@ -56,4 +61,6 @@ public class SectionOfStadium {
     public void setStadium(Stadium stadium) {
         this.stadium = stadium;
     }
+
+    public void setColor(String color) { this.color = color;}
 }

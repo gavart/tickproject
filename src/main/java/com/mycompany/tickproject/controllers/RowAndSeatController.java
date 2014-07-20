@@ -4,6 +4,7 @@ import com.mycompany.tickproject.helper.Generation;
 import com.mycompany.tickproject.models.*;
 import com.mycompany.tickproject.helper.WorkWithTxtFile;
 import com.mycompany.tickproject.service.FacadeService;
+import com.sun.corba.se.spi.activation._ServerManagerImplBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +38,7 @@ public class RowAndSeatController {
     @RequestMapping(value = "/upload_files", method = RequestMethod.POST)
     public String save(@ModelAttribute("uploadForm") FileUploadForm uploadForm,
             Model map) throws IOException {
-        String pathToFilesDirectory = "/Users/apple/Desktop/Test Upload File/src/main/webapp/resources/files/";
+        String pathToFilesDirectory = "/Users/apple/IdeaProjects/tickproject/src/main/webapp/textfiles/";
         List<MultipartFile> files = uploadForm.getFiles();
         List<String> sectionsId = uploadForm.getSectionsId();
         List<List<RowAndSeat>> listWithListsOfRowsAndSeatsBySection = new ArrayList<>();
@@ -67,19 +68,11 @@ public class RowAndSeatController {
                 SectionOfStadium sectionOfStadium = facadeService.getSectionOfStadiumService().getSectionOfStadium(Integer.parseInt(sectionAndNameFileWithSeats.getSectionId()));
                 listWithListsOfRowsAndSeatsBySection.add(workWithTxtFile.getRowsAndSeatsFromFile(pathToFilesDirectory + sectionAndNameFileWithSeats.getFileName(), sectionOfStadium));
             }
-            /*
-            for(String fileName : workWithTxtFile.getFileNames()) {
-                if(fileName!="") {
 
-                SectionOfStadium sectionOfStadium = facadeService.getSectionOfStadiumService().getSectionOfStadium(Integer.parseInt(sectionsId.get(currentPosition)));
-                listWithListsOfRowsAndSeatsBySection.add(workWithTxtFile.getRowsAndSeatsFromFile(pathToFilesDirectory + fileName, sectionOfStadium));
-                }
-                currentPosition++;
-            }*/
-
-            for(List<RowAndSeat> list : listWithListsOfRowsAndSeatsBySection) {
+     ///////
+            /*for(List<RowAndSeat> list : listWithListsOfRowsAndSeatsBySection) {
                  facadeService.getRowAndSeatService().addRowsAndSeatsFromFile(list);
-            }
+            }*/
 
             map.addAttribute("rowsAndSeats", generation.generateRowsAndSeatsFromRowsAndSeatsList(workWithTxtFile.getRowsAndSeatsFromFile(pathToFilesDirectory + workWithTxtFile.getFileNames().get(0), facadeService.getSectionOfStadiumService().getSectionOfStadium(Integer.parseInt(sectionsId.get(1)))))); // + workWithTxtFile.getFileNames().get(0)
             return "file_upload_success";
@@ -88,9 +81,71 @@ public class RowAndSeatController {
             return "file_upload_failed";
         }
     }
+///sellseat?idsection=27&idaction=2&idstadium=1&idseat=76202
+    @RequestMapping(value = "/sellseat", method = RequestMethod.GET)
+    public String sellSeat(HttpServletRequest request, HttpServletResponse response,Model map) {
+        int sectionID =Integer.parseInt(request.getParameter("idsection"));
+        int actionID = Integer.parseInt(request.getParameter("idaction"));
+        int stadiumID = Integer.parseInt(request.getParameter("idstadium"));
+        int seatID = Integer.parseInt(request.getParameter("idseat"));
+        Ticket ticket = new Ticket();
+        RowAndSeat rowAndSeat = new RowAndSeat();
+        rowAndSeat.setId(seatID);
+        Action action = new Action();
+        action.setId(actionID);
+        Status status = new Status();
+        status.setId(3);
+        Stadium stadium = new Stadium();
+        stadium.setId(stadiumID);
+        Customer customer = new Customer();
+        customer.setId(1);
+        SectionOfStadium sectionOfStadium = new SectionOfStadium();
+        sectionOfStadium.setId(sectionID);
+        ticket.setSectionOfStadium(sectionOfStadium);
+        ticket.setStadium(stadium);
+        ticket.setRowAndSeat(rowAndSeat);
+        ticket.setAction(action);
+        ticket.setStatus(status);
+        ticket.setCustomer(customer);
+        ticket.setPrice(facadeService.getPriceService().getActualPrice(sectionID,actionID));
+        facadeService.getTicketService().sellTicket(ticket);
+        return "redirect:index";
+    }
+
     @RequestMapping(value = "/showseats", method = RequestMethod.GET)
     public String showRowsAndSeats(HttpServletRequest request, HttpServletResponse response,Model map) {
         int sectionID =Integer.parseInt(request.getParameter("idsection"));
+        int actionID = Integer.parseInt(request.getParameter("idaction"));
+        Generation generation = new Generation();
+        List<Ticket> receivedTicketList = facadeService.getTicketService().getTickets(actionID, sectionID);
+        Price price = facadeService.getPriceService().getActualPrice(sectionID,actionID);
+        List<RowAndSeat> rowAndSeatList = facadeService.getRowAndSeatService().getRowsAndSeats(sectionID);
+        List<Ticket> newTicketList = new ArrayList<>();
+        for(int i=0;i<rowAndSeatList.size();i++) {
+            Ticket t = new Ticket();
+            t.setRowAndSeat(rowAndSeatList.get(i));
+            t.setPrice(price);
+            newTicketList.add(t);
+        }
+        for(Ticket ticket :receivedTicketList) {
+            //if(ticket!=null) {
+                int index = 0;
+                for(Ticket ticket1 : newTicketList) {
+                    if(ticket.getRowAndSeat().getId()==ticket1.getRowAndSeat().getId()) {
+                        newTicketList.set(index, ticket);
+                    }
+                    index++;
+                }
+            //} else {
+            //    break;
+            //}
+        }
+
+
+        //generateRowsAndSeatsFromTicketsList
+        map.addAttribute("rowsAndSeats", generation.generateRowsAndSeatsFromTicketsList(newTicketList));//generation.generateRowsAndSeatsFromRowsAndSeatsList(facadeService.getRowAndSeatService().getRowsAndSeats(sectionID)));
+        return "showseats";
+        /*int sectionID =Integer.parseInt(request.getParameter("idsection"));
         int actionID = Integer.parseInt(request.getParameter("idaction"));
         Generation generation = new Generation();
         List<Ticket> ticketList = facadeService.getTicketService().getTickets(actionID, sectionID);
@@ -110,13 +165,15 @@ public class RowAndSeatController {
                     }
                     index++;
                 }
+            } else {
+                break;
             }
         }
 
 
         //generateRowsAndSeatsFromTicketsList
         map.addAttribute("rowsAndSeats", generation.generateRowsAndSeatsFromTicketsList(ticketList1));//generation.generateRowsAndSeatsFromRowsAndSeatsList(facadeService.getRowAndSeatService().getRowsAndSeats(sectionID)));
-        return "showseats";
+        return "showseats";*/
     }
 
 }

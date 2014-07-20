@@ -22,4 +22,15 @@ public class TicketServiceImpl implements TicketService {
     public List<Ticket> getTickets(int actionID, int sectionID) {
         return facadeDAO.getTicketDAO().getTickets(actionID,sectionID);
     }
+
+    /**
+     * This method sells a ticket by id an object of {@link com.mycompany.tickproject.models.Ticket}. Change {@link com.mycompany.tickproject.models.Ticket#status} to id=3 and status SELLED
+     *
+     * @param ticket an object of {@link com.mycompany.tickproject.models.Ticket}
+     */
+    @Transactional
+    @Override
+    public void sellTicket(Ticket ticket) {
+        facadeDAO.getTicketDAO().sellTicket(ticket);
+    }
 }

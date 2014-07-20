@@ -7,6 +7,8 @@ import com.mycompany.tickproject.models.Ticket;
 
 import javax.validation.constraints.Null;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /** This class provides method that are used to generate in the correct order rows and seats
@@ -38,9 +40,18 @@ public class Generation {
 
     public String generateSections(List<SectionOfStadium> list, String contextPath,int actionId) {
         StringBuilder sections = new StringBuilder();
-        sections.append("<tr>" + "\n");
+        sections.append("<tr>");
+        int count = 1;
         for(SectionOfStadium sectionOfStadium : list) {
-            sections.append("<td data-idsection=\""+sectionOfStadium.getId()+"\"><a href=\""+ contextPath +"/showseats?idaction="+actionId+"&idsection="+sectionOfStadium.getId()+"\">Сектор №\""+ sectionOfStadium.getName() +"\"</a></td>");
+            if(count == 7 ) {
+                count = 1;
+                sections.append("<td style=\"background-color:"+ sectionOfStadium.getColor() +";\" data-idsection=\""+sectionOfStadium.getId()+"\"><a href=\""+ contextPath +"/showseats?idaction="+actionId+"&idsection="+sectionOfStadium.getId()+"\">" + sectionOfStadium.getName() + "</a></td>");
+                sections.append("</tr>");
+                sections.append("<tr>");
+            } else {
+                sections.append("<td style=\"background-color:"+ sectionOfStadium.getColor() +";\" data-idsection=\""+sectionOfStadium.getId()+"\"><a href=\""+ contextPath +"/showseats?idaction="+actionId+"&idsection="+sectionOfStadium.getId()+"\">" + sectionOfStadium.getName() + "</a></td>");
+                count ++;
+            }
         }
         sections.append("</tr>");
         return sections.toString();
@@ -99,9 +110,9 @@ public class Generation {
             }
             else {
                 if(ticket.getStatus()== null) {
-                    seat = "<td class=\"active\" id=\"1\" rowText=\""+ ticket.getRowAndSeat().getRow()+"\" seatText=\""+String.format("%d", ticket.getRowAndSeat().getSeat())+"\" >"+ String.format("%d", ticket.getRowAndSeat().getSeat())+"</td>";//String.format("%d",ticket.getSeat());
+                    seat = "<td class=\"active\" id=\""+ticket.getRowAndSeat().getId()+"\" rowText=\""+ ticket.getRowAndSeat().getRow()+"\" seatText=\""+String.format("%d", ticket.getRowAndSeat().getSeat())+"\" priceSeat=\""+ticket.getPrice().getPrice()+"\" >"+ String.format("%d", ticket.getRowAndSeat().getSeat())+"</td>";//String.format("%d",ticket.getSeat());
                 } else {
-                    seat = "<td class=\"" + ticket.getStatus().getStatus() + "\" id=\"1\" rowText=\""+ ticket.getRowAndSeat().getRow()+"\" seatText=\""+String.format("%d", ticket.getRowAndSeat().getSeat())+"\" >"+ String.format("%d", ticket.getRowAndSeat().getSeat())+"</td>";//String.format("%d",ticket.getSeat());
+                    seat = "<td class=\"" + ticket.getStatus().getStatus() + "\" id=\""+ticket.getRowAndSeat().getId()+"\" rowText=\""+ ticket.getRowAndSeat().getRow()+"\" seatText=\""+String.format("%d", ticket.getRowAndSeat().getSeat())+"\" priceSeat=\""+ticket.getPrice().getPrice()+"\" >"+ String.format("%d", ticket.getRowAndSeat().getSeat())+"</td>";//String.format("%d",ticket.getSeat());
                 }
             }
             if(row1==0) {

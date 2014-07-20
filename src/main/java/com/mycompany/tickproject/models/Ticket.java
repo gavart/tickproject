@@ -15,6 +15,7 @@ public class Ticket {
     private SectionOfStadium sectionOfStadium;
     private RowAndSeat rowAndSeat;
     private Status status;
+    private Price price;
     private Customer customer;
 
     //getters
@@ -50,6 +51,11 @@ public class Ticket {
         return status;
     }
     @ManyToOne
+    @JoinColumn(name="price_id")
+    public Price getPrice() {
+        return price;
+    }
+    @ManyToOne
     @JoinColumn(name="customer_id")
     public Customer getCustomer() {
         return customer;
@@ -79,6 +85,10 @@ public class Ticket {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public void setPrice(Price price) {
+        this.price = price;
     }
 
     public void setCustomer(Customer customer) {

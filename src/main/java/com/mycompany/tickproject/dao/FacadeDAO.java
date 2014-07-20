@@ -16,6 +16,7 @@ public class FacadeDAO {
     private StadiumDAO stadiumDAO;
     private TicketDAO ticketDAO;
     private ActionDAO actionDAO;
+    private PriceDAO priceDAO;
 
     @Autowired
     public void setRowAndSeatDAO(RowAndSeatDAO rowAndSeatDAO) {
@@ -55,5 +56,13 @@ public class FacadeDAO {
     }
     public ActionDAO getActionDAO() {
         return actionDAO;
+    }
+
+    @Autowired
+    public void setPriceDAO(PriceDAO priceDAO) {
+        this.priceDAO = priceDAO;
+    }
+    public PriceDAO getPriceDAO() {
+        return priceDAO;
     }
 }

@@ -3,8 +3,7 @@ body
     width:100%;
     height:100%;
 }
-#container
-{
+#container {
     width:1024px;
     margin-left:auto;
     margin-right:auto;
@@ -67,27 +66,33 @@ body
 }
 
 .select-section-box td{
-    width: 150px; height: 70px;
+    width: 150px; height: 120px;
     text-align: center;
     border: solid 3px #fff;
-    background: #dfdfdf;
+   /* background: #dfdfdf;*/
     font-weight: bold;
-    font-size: 20px;
+    font-size: 40px;
     line-height: 20px;
     cursor:pointer;
 
 }
-.select-section-box td a{
+.select-section-box td a {
     width: 100%;
     height: 100%;
-    padding-top: 22px;
+    padding-top: 52px;
     display: block;
-    border: 1px solid deepskyblue;
+    /*border: 1px solid deepskyblue;*/
     text-decoration: none;
     color:#000000;
 }
 .select-section-box td a:hover{
-    color:orangered;
+    color: orangered;
+    border-bottom: 3px solid deepskyblue;
+}
+.select-section-box td a:active{
+    color: deepskyblue;
+    border-bottom: 3px solid orangered;
+
 }
 
 

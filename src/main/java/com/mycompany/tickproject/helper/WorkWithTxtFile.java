@@ -61,11 +61,13 @@ public class WorkWithTxtFile {
                 if(fileName.length()!=0)
                 {
                     if (!"".equalsIgnoreCase(fileName)) {
-                        try {
-                            multipartFile
-                                    .transferTo(new File(saveDirectory + fileName));
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                        if(checkExistsFileInFolder(saveDirectory,fileName)==false) {
+                            try {
+                                multipartFile
+                                        .transferTo(new File(saveDirectory + fileName));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                         fileNames.add(fileName);
                     }
@@ -75,6 +77,11 @@ public class WorkWithTxtFile {
         }
     }
 
+    public boolean checkExistsFileInFolder(String directory, String fileName) {
+        String temp = fileName + ".txt";
+        boolean check = new File(directory, temp).exists();
+        return check;
+    }
     public List<String> getFileNames() {
         return this.fileNames;
     }

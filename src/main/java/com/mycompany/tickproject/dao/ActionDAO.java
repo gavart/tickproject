@@ -28,6 +28,13 @@ public interface ActionDAO {
      */
     public Action getAction(int id);
 
+    /** This method gets last added an object from the database and returns an object of {@link com.mycompany.tickproject.models.Action}
+     *
+     * @return an object of {@link com.mycompany.tickproject.models.Action}
+     */
+    public Action getLastAddedAction();
+
+
     /** This method get actions from the database and return list with objects of {@link com.mycompany.tickproject.models.Action}
      *
      * @return list with objects of {@link com.mycompany.tickproject.models.Action}

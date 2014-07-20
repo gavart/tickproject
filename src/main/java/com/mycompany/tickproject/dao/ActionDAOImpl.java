@@ -64,6 +64,18 @@ public class ActionDAOImpl implements ActionDAO {
     }
 
     /**
+     * This method gets last added an object from the database and returns an object of {@link com.mycompany.tickproject.models.Action}
+     *
+     * @return an object of {@link com.mycompany.tickproject.models.Action}
+     */
+    @Override
+    public Action getLastAddedAction() {
+        Session session = sessionFactory.getCurrentSession();
+        Action action = (Action) session.createSQLQuery("SELECT * FROM Actions ORDER BY id DESC LIMIT 1").addEntity(Action.class).uniqueResult();
+        return action;
+    }
+
+    /**
      * This method get actions from the database and return list with objects of {@link com.mycompany.tickproject.models.Action}
      *
      * @return list with objects of {@link com.mycompany.tickproject.models.Action}

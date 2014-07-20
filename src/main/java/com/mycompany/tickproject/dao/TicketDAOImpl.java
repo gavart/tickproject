@@ -1,6 +1,7 @@
 package com.mycompany.tickproject.dao;
 
 import com.mycompany.tickproject.models.Ticket;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,11 +55,31 @@ public class TicketDAOImpl implements TicketDAO {
         */
 
         Session session = sessionFactory.getCurrentSession();
-        List<Ticket> ticketList = (List<Ticket>) session.createSQLQuery("Select t.id, t.action_id, t.stadium_id, t.section_of_stadium_id, t.row_and_seat_id, t.status_id, t.customer_id"+
+        List<Ticket> ticketList = (List<Ticket>) session.createSQLQuery("Select * From Tickets Where action_id = " + actionID + " AND section_of_stadium_id = " + sectionID).addEntity(Ticket.class).list();
+        /*List<Ticket> ticketList = (List<Ticket>) session.createSQLQuery("Select t.id, t.action_id, t.stadium_id, t.section_of_stadium_id, t.row_and_seat_id, t.status_id, t.price_id, t.customer_id"+
                 " From Tickets AS t "+
                 " RIGHT OUTER JOIN "+
                 " Rows_and_seats AS ras "+
-                " ON t.row_and_seat_id = ras.id AND t.action_id = " + actionID + " AND t.section_of_stadium_id = " +sectionID ).addEntity(Ticket.class).list();
+                " ON t.row_and_seat_id = ras.id AND t.action_id = " + actionID + " AND t.section_of_stadium_id = " +sectionID + " ORDER By t.row_and_seat_id DESC" ).addEntity(Ticket.class).list();
+                */
+        return ticketList;
+    }
+
+    @Override
+    public List<Object[]> getTicketsInListObjects(int actionID, int sectionID) {
+        Session session = sessionFactory.getCurrentSession();
+        List<Object[]> ticketList = session.createSQLQuery("Select t.id, t.action_id, t.stadium_id, t.section_of_stadium_id, ras.id AS row_and_seat_id, t.status_id, t.price_id, t.customer_id, pr.price AS old_price, (SELECT price\n" +
+                "From Prices\n" +
+                "Where section_of_stadium_id = " + sectionID + " AND action_id = " + actionID + " AND (date_price > CURDATE()) ORDER BY date_price DESC LIMIT 1\n" +
+                ") AS actual_price\n" +
+                "From Tickets AS t\n" +
+                "RIGHT OUTER JOIN\n" +
+                "Rows_and_seats AS ras\n" +
+                "ON t.row_and_seat_id = ras.id AND t.action_id = " + actionID + " AND t.section_of_stadium_id = " + sectionID + "\n" +
+                "LEFT OUTER JOIN\n" +
+                "Prices As pr\n" +
+                "ON t.price_id = pr.id\n" +
+                "ORDER BY t.row_and_seat_id DESC").list();
         return ticketList;
     }
 
@@ -76,11 +97,17 @@ public class TicketDAOImpl implements TicketDAO {
     /**
      * This method sells a ticket by id an object of {@link com.mycompany.tickproject.models.Ticket}. Change {@link com.mycompany.tickproject.models.Ticket#status} to id=3 and status SELLED
      *
-     * @param ticketID id an object of {@link com.mycompany.tickproject.models.Ticket}
+     * @param ticket an object of {@link com.mycompany.tickproject.models.Ticket}
      */
     @Override
-    public void sellTicket(int ticketID) {
-
+    public void sellTicket(Ticket ticket) {
+        Session session = null;
+        try {
+            session = sessionFactory.getCurrentSession();
+            session.save(ticket);
+        } catch (HibernateException he) {
+            he.printStackTrace();
+        }
     }
 
     /**

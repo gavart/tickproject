@@ -9,4 +9,9 @@ import java.util.List;
  */
 public interface TicketService {
     public List<Ticket> getTickets(int actionID, int sectionID);
+    /** This method sells a ticket by id an object of {@link com.mycompany.tickproject.models.Ticket}. Change {@link com.mycompany.tickproject.models.Ticket#status} to id=3 and status SELLED
+     *
+     * @param ticket an object of {@link com.mycompany.tickproject.models.Ticket}
+     */
+    public void sellTicket(Ticket ticket);
 }

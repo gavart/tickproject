@@ -25,7 +25,7 @@ public interface TicketDAO {
      * @return list with objects of {@link com.mycompany.tickproject.models.Ticket}
      */
     public List<Ticket> getTickets(int actionID, int sectionID);
-
+    public List<Object[]> getTicketsInListObjects(int actionID, int sectionID);
     //public Ticket getTicket(int actionID, int sectionID, int rowAndSeatID);
 
     /** This method gets reserved ticket on a certain customer from database and return an object of {@link com.mycompany.tickproject.models.Ticket}
@@ -37,9 +37,9 @@ public interface TicketDAO {
 
     /** This method sells a ticket by id an object of {@link com.mycompany.tickproject.models.Ticket}. Change {@link com.mycompany.tickproject.models.Ticket#status} to id=3 and status SELLED
      *
-     * @param ticketID id an object of {@link com.mycompany.tickproject.models.Ticket}
+     * @param ticket an object of {@link com.mycompany.tickproject.models.Ticket}
      */
-    public void sellTicket(int ticketID);
+    public void sellTicket(Ticket ticket);
 
     /** This method reserves a ticket by {@link com.mycompany.tickproject.models.Customer#id} and {@link com.mycompany.tickproject.models.Ticket#id}
      *

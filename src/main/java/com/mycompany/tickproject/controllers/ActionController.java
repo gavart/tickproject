@@ -25,11 +25,15 @@ public class ActionController {
     @Autowired
     private FacadeService facadeService;
 
-    @RequestMapping(value = "/action/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/add_action_form", method = RequestMethod.GET)
+    public String addActionForm(HttpServletRequest request, HttpServletResponse response,Model map) {
+        return "add_action_form";
+    }
+    @RequestMapping(value = "/addaction", method = RequestMethod.GET)
     public void addAction(HttpServletRequest request, HttpServletResponse response,Model map) {
-        String name = "Черноморец - Олимпик";//
-        String dateAction ="2014-07-26 19:00:00";//Timestamp dateAction;
-        Boolean isDefaultPrices = true;
+        String name = request.getParameter("nameaction");//"Черноморец - Олимпик";//
+        String dateAction = request.getParameter("datetimeaction").replace("T"," ")+":00";//"2014-07-26 19:00:00";//Timestamp dateAction;
+        Boolean isNewPrices = Boolean.valueOf(request.getParameter("isNewPrices"));
 
         Action action = new Action();
         Stadium stadium = new Stadium();
@@ -39,9 +43,9 @@ public class ActionController {
         action.setIsActive(true);
         action.setDateTimeAction(Timestamp.valueOf(dateAction));
 
-       // facadeService.getActionService().addAction(action);
+       /// facadeService.getActionService().addAction(action);
         Action lastAddedAction = facadeService.getActionService().getLastAddedAction();
-        if(isDefaultPrices==true) {
+        if(isNewPrices==false) {
             List<Price> defaultPrices = facadeService.getPriceService().getPrices(1);//default actionID = 1
             for(Price price : defaultPrices) {
                 Price newPrice = new Price();

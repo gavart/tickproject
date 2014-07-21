@@ -40,7 +40,7 @@ public class Generation {
 
     public String generateSections(List<SectionOfStadium> list, String contextPath,int actionId) {
         StringBuilder sections = new StringBuilder();
-        sections.append("<ul class=\"sector_number\">\n");
+        sections.append("<ul class=\"sector-number\">\n");
         int count = 1;
         for(SectionOfStadium sectionOfStadium : list) {
             sections.append("<li style=\"background-color:"+ sectionOfStadium.getColor() +";\" data-idsection=\""+sectionOfStadium.getId()+"\"><a href=\""+ contextPath +"/showseats?idaction="+actionId+"&idsection="+sectionOfStadium.getId()+"\">" + sectionOfStadium.getName() + "</a></li>");

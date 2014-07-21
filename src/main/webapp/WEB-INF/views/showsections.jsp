@@ -11,10 +11,10 @@
 <jsp:include page="header.jsp" />
 <jsp:include page="menu.jsp" />
 
-    <div class="content actions">
-        <div class="transparent_div">
+    <div class="content actions min-height-content">
+        <div class="transparent-div">
             ${actionString}
-            <div class="div_sectors clearfix">
+            <div class="div-sectors clearfix">
                 ${listSections}
             </div>
         </div>

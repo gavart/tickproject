@@ -11,12 +11,16 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/normalize.css" type="text/css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" type="text/css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" type="text/css" />
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css" type="text/css" />
+        <!--<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" />-->
+
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js" charset="UTF-8"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/default.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js" charset="UTF-8"></script>
         
     </head>
     <body>
-        <div id="container">
+        <div id="wrapper">
       
         
         

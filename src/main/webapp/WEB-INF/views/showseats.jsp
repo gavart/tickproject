@@ -10,17 +10,17 @@
 <jsp:include page="header.jsp" />
 <jsp:include page="menu.jsp" />
 
-    <div id="content" class="actions">
-        <div class="transparent_div">
+    <div id="content" class="actions min-height-content">
+        <div class="transparent-div">
             <div id="oneAction">
                 <h2>№4</h2>
                 <span>тут кол-во свободных мест, и</span>
                 <span class="details"></span>
             </div>
-            <table id="select_plase_box" class="select_plase_box">
+            <table id="select_plase_box" class="select-plase-box">
                 ${rowsAndSeats}
             </table>
-            <div class="div_button">
+            <div class="div-button">
                 <a class="clear_seats" href="">Отменить выбор</a>
                 <a href="">Продать</a>
                 <a href="">Бронь</a>

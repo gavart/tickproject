@@ -12,7 +12,7 @@
 
     <div id="content">
         <div class="site-padding">
-            <table id="select_plase_box" class="select_plase_box">
+            <table id="select_plase_box" class="select-plase-box">
                 ${rowsAndSeats}
             </table>
         </div>

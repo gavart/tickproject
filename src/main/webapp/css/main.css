@@ -1,18 +1,24 @@
-.menu{ 
-	margin: 20px;
+#menu{
+	height: 20px;
+    border: 2px solid darkgreen;
+}
+.min-height-content {
+    min-height: 600px;
 }
 .content{
-    width:1000px;
 	text-align:center; 
 	margin:0 auto;
 }
-.actions{
-	border:solid #666 1px;
-	margin:0 auto;
-	background-color: #E6E6E6;
-	background: url(../images/grass_3.jpg) no-repeat;
-	border-radius: 20px;	
-	padding: 0 1%;
+.actions, #content{
+    /*margin-top: -25px;*/
+    /*margin-top: -50px;
+	border:solid #666 1px;*/
+
+
+
+	/*border-radius: 0px 0px 20px 20px;
+    border-radius: 0px 0px 20px 20px;
+	padding: 0 1%;*/
 }
 li.action{
     list-style-type: none;
@@ -22,7 +28,7 @@ li.action a{
     border: solid darkred 1px;
     display: block;
     border-radius: 20px;
-    background-color: aliceblue;
+    /*background-color: aliceblue;*/
     margin: 0 0 13px 0;
     background-color:#CF3;
     background: linear-gradient(to top, #D4BF55 0%, #fff 100%);
@@ -36,7 +42,7 @@ li.action a{
 	border: solid #666 1px;
 	margin: 0 0 13px 0;	
 	border-radius: 20px;
-	background: #FBFBFB;
+	/*background: #FBFBFB;*/
 	background-color:#CF3;
     background: linear-gradient(to top, #D4BF55 0%, #fff 100%);
 	background: -webkit-gradient(linear, left bottom, left top, from(#FFDFAA), to(#fff));
@@ -64,14 +70,14 @@ li.action a{
 /*
 action page, code for page with sectors
 */
-.div_sector_main{
+.div-sector-main {
 	height:auto;
 	width: 760px;
 }
-.div_sectors{
+.div-sectors {
 	height: auto;
 }
-.div_sectors ul li{
+.div-sectors ul li{
 	float: left;
 	list-style-type: none;
 	width: 76px;
@@ -80,7 +86,7 @@ action page, code for page with sectors
 	border-radius: 7px;
 	border:solid #333 1px;
 		}
-.div_sectors ul li a{
+.div-sectors ul li a{
 	background-color:#CF3;
     background: linear-gradient(to top, transparent 0%, #fff 100%);
 	background: -webkit-gradient(linear, left bottom, left top, from(transparent), to(#fff));
@@ -92,33 +98,33 @@ action page, code for page with sectors
 	line-height: 60px;
 	text-decoration:none;
 		}
-.div_sectors ul li a:hover{
+.div-sectors ul li a:hover{
     /*
 	background: linear-gradient(to top, #fff 0%, transparent 100%);
 	background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(#fff));
 	*/
 	box-shadow: inset 0px 0px 20px 2px rgba(0,0,0,0.3);
 		}
-.div_sectors ul{margin: 13px 0 13px 0; padding: 0;}
+.div-sectors ul{margin: 13px 0 13px 0; padding: 0;}
 
-.sector_number{
+.sector-number {
 	font-size: 30px;
 }
-.sector_text{
+.sector-text {
 	float:left;
 }
-ul.sector_text li{
+ul.sector-text li{
 	width:142px;
 }
-ul.sector_text li a{
+ul.sector-text li a{
 	width:142px;
 	font-size:18px;
 }
-.transparent_div {
+.transparent-div {
 	background-color: rgba(255, 255, 255, 0.3);
 	border-radius: 20px;
 	padding: 10px;
-	margin: 20px 10px;
+	margin: 40px 10px;
 }
 
 /*
@@ -128,12 +134,12 @@ show or drawing rows and seats page
 .checked{
     background: #87ff6f !important;
 }
-.div_button{
+.div-button {
     text-align: right;
     margin: 15px 0px;
     line-height: 10px;
 }
-.div_button a{
+.div-button a{
     text-decoration: none;
     border: solid darkred 1px;
     border-radius: 5px;
@@ -141,7 +147,7 @@ show or drawing rows and seats page
     padding: 5px;
     margin: 5px 0px;
 }
-.div_button h2{
+.div-button h2{
     float: left;
     margin: 0px;
     color: #333333;
@@ -155,8 +161,10 @@ show or drawing rows and seats page
     border-radius: 10px;
     margin: 0px 10px;
 }
-.footer_group{
+.footer-group {
     text-align: center;
+
+    font-weight: bold;
 }
 span.details{
     background-color: #B4B4B4;

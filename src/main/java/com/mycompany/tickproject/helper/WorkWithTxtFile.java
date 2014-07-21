@@ -78,8 +78,8 @@ public class WorkWithTxtFile {
     }
 
     public boolean checkExistsFileInFolder(String directory, String fileName) {
-        String temp = fileName + ".txt";
-        boolean check = new File(directory, temp).exists();
+        String temp = directory + fileName;
+        boolean check = new File(temp).exists();
         return check;
     }
     public List<String> getFileNames() {

@@ -83,11 +83,12 @@ public class RowAndSeatController {
         }
     }
 ///sellseat?idsection=27&idaction=2&idstadium=1&idseat=76202
-    @RequestMapping(value = "/sellseats", method = RequestMethod.GET)
+    @RequestMapping(value = "/sellseats", method = RequestMethod.POST)
     public String sellSeat(HttpServletRequest request, HttpServletResponse response,Model map) {
-        String[] rowandseatIDs = request.getParameterValues("rowandseatsID");
-        //String pricesID = request.getParameter("priceID");
         int actionID = Integer.parseInt(request.getParameter("actionID"));
+        String[] rowandseatIDs = request.getParameterValues("rowandseatsID[]");
+        //String pricesID = request.getParameter("priceID");
+
             for(int i=0; i < rowandseatIDs.length; i++) {
                 RowAndSeat rowAndSeat = facadeService.getRowAndSeatService().getRowAndSeat(Integer.parseInt(rowandseatIDs[i]));
                 Action action = facadeService.getActionService().getAction(actionID);
@@ -134,7 +135,7 @@ public class RowAndSeatController {
         ticket.setCustomer(customer);
         ticket.setPrice(facadeService.getPriceService().getActualPrice(sectionID,actionID));
         facadeService.getTicketService().sellTicket(ticket);*/
-        return "";
+        return "OK";
     }
 
     @RequestMapping(value = "/showseats", method = RequestMethod.GET)

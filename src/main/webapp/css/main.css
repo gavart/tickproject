@@ -37,7 +37,12 @@ li.action a{
     overflow:hidden;
     padding: 10px;
 }
-.action_content
+li.action a:hover{
+
+    background: linear-gradient(to top, #D4BF55 0%, #fff 100%);
+    background: -webkit-gradient(linear, left bottom, left top, from(#ffd77b), to(#fbfbfb));
+}
+.action-content
 {
 	border: solid #666 1px;
 	margin: 0 0 13px 0;	
@@ -48,20 +53,20 @@ li.action a{
 	background: -webkit-gradient(linear, left bottom, left top, from(#FFDFAA), to(#fff));
 	overflow:hidden;
 }
-.action_content a
+.action-content a
 {
     text-decoration: none;
 }
-.actions_menu
+.actions-menu
 {
 	padding: 20px 80px;
 }
-.actions_menu button
+.actions-menu button
 {
 	float: right;
 	width: 200px;
 }
-.actions_menu h3
+.actions-menu h3
 {
 	float: left;
 	margin:0;
@@ -132,7 +137,7 @@ css for Sector page
 show or drawing rows and seats page
 */
 .checked{
-    background: #87ff6f !important;
+    background-color: #87ff6f !important;
 }
 .div-button {
     text-align: right;
@@ -154,18 +159,18 @@ show or drawing rows and seats page
 }
 #oneAction h2{
     float: left;
-    margin: 0px;
     color: #333333;
     overflow: hidden;
-    width: 100px;
-    border-radius: 10px;
+    width: 300px;
     margin: 0px 10px;
+    font-size: 24px;
+    line-height: 24px;
+    text-align: left;
 }
 .footer-group {
     text-align: center;
-
     font-weight: bold;
 }
 span.details{
-    background-color: #B4B4B4;
+
 }

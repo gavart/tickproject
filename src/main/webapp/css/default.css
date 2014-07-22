@@ -41,6 +41,9 @@ body
     text-align: left;
     text-transform: uppercase;
 }
+.select-plase-box td:not(.checked):hover{
+    background-color: #baffc3!important;
+}
 .select-plase-box td:empty{
     cursor:default;
 }
@@ -55,8 +58,9 @@ body
     color: #000;
 }
 
-.select-plase-box td.tapped {
-    background: #829AB5 !important;
+.select-plase-box td.sold {
+    background: #35aab5 !important;
+    cursor: default;
 }
 
 

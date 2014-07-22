@@ -22,7 +22,7 @@ public class Generation {
 
         SimpleDateFormat ftDate = new SimpleDateFormat ("yyyy-MM-dd");
         SimpleDateFormat ftTime = new SimpleDateFormat ("HH:mm");
-        paintedAction.append("<div id=\"oneAction\"><span class=\"dateAction\">"+ftDate.format(action.getDateTimeAction()) +"</span> в <span class=\"timeAction\">"+ftTime.format(action.getDateTimeAction())+"</span> Стадион:<span class=\"placeAction\">"+action.getStadium().getName()+"</span><div class=\"nameAction\">"+action.getNameAction()+"</div></div>");
+        paintedAction.append("<div id=\"oneAction\" data-actionId =\""+action.getId()+"\"><span class=\"dateAction\">"+ftDate.format(action.getDateTimeAction()) +"</span> в <span class=\"timeAction\">"+ftTime.format(action.getDateTimeAction())+"</span> Стадион:<span class=\"placeAction\">"+action.getStadium().getName()+"</span><div class=\"nameAction\">"+action.getNameAction()+"</div></div>");
         return paintedAction.toString();
     }
 
@@ -33,7 +33,7 @@ public class Generation {
         SimpleDateFormat ftTime = new SimpleDateFormat ("HH:mm");
 
         for(Action action:actionList) {
-            paintedActions.append("<li class=\"action\"><a href=\""+contextPath+"/getsections?idaction="+action.getId()+"&idstadium="+action.getStadium().getId()+"\" ><span class=\"dateAction\">"+ftDate.format(action.getDateTimeAction()) +"</span> в <span class=\"timeAction\">"+ftTime.format(action.getDateTimeAction())+"</span> Стадион:<span class=\"placeAction\">"+action.getStadium().getName()+"</span><div class=\"nameAction\">"+action.getNameAction()+"</div></a></li>");
+            paintedActions.append("<li class=\"action\"><a  data-actionId =\""+action.getId()+"\" href=\""+contextPath+"/getsections?idaction="+action.getId()+"&idstadium="+action.getStadium().getId()+"\" ><span class=\"dateAction\">"+ftDate.format(action.getDateTimeAction()) +"</span> в <span class=\"timeAction\">"+ftTime.format(action.getDateTimeAction())+"</span> Стадион:<span class=\"placeAction\">"+action.getStadium().getName()+"</span><div class=\"nameAction\">"+action.getNameAction()+"</div></a></li>");
         }
         return paintedActions.toString();
     }
@@ -102,9 +102,9 @@ public class Generation {
             }
             else {
                 if(ticket.getStatus()== null) {
-                    seat = "<td title =\""+"ряд: "+ticket.getRowAndSeat().getRow()+"\"class=\"active\" id=\""+ticket.getRowAndSeat().getId()+"\" rowText=\""+ ticket.getRowAndSeat().getRow()+"\" seatText=\""+String.format("%d", ticket.getRowAndSeat().getSeat())+"\" priceSeat=\""+ticket.getPrice().getPrice()+"\" >"+ String.format("%d", ticket.getRowAndSeat().getSeat())+"</td>";//String.format("%d",ticket.getSeat());
+                    seat = "<td  title =\""+"ряд: "+ticket.getRowAndSeat().getRow()+"\"class=\"active\" rowAndSeatID=\""+ticket.getRowAndSeat().getId()+"\" rowText=\""+ ticket.getRowAndSeat().getRow()+"\" seatText=\""+String.format("%d", ticket.getRowAndSeat().getSeat())+"\" priceSeat=\""+ticket.getPrice().getPrice()+"\" priceID=\""+ticket.getPrice().getId()+"\"  >"+ String.format("%d", ticket.getRowAndSeat().getSeat())+"</td>";//String.format("%d",ticket.getSeat());
                 } else {
-                    seat = "<td class=\"" + ticket.getStatus().getStatus() + "\" id=\""+ticket.getRowAndSeat().getId()+"\" rowText=\""+ ticket.getRowAndSeat().getRow()+"\" seatText=\""+String.format("%d", ticket.getRowAndSeat().getSeat())+"\" priceSeat=\""+ticket.getPrice().getPrice()+"\" >"+ String.format("%d", ticket.getRowAndSeat().getSeat())+"</td>";//String.format("%d",ticket.getSeat());
+                    seat = "<td title =\""+"ряд: "+ticket.getRowAndSeat().getRow()+"\" class=\"" + ticket.getStatus().getStatus() + "\" rowAndSeatID=\""+ticket.getRowAndSeat().getId()+"\" rowText=\""+ ticket.getRowAndSeat().getRow()+"\" seatText=\""+String.format("%d", ticket.getRowAndSeat().getSeat())+"\" priceSeat=\""+ticket.getPrice().getPrice()+"\" priceID=\""+ticket.getPrice().getId()+"\"  >"+ String.format("%d", ticket.getRowAndSeat().getSeat())+"</td>";//String.format("%d",ticket.getSeat());
                 }
             }
             if(row1==0) {

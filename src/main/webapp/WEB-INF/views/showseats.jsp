@@ -13,19 +13,19 @@
     <div id="content" class="actions min-height-content">
         <div class="transparent-div">
             <div id="oneAction">
-                <h2>№4</h2>
-                <span>тут кол-во свободных мест, и</span>
+                <h2>Сектор №4</h2>
+                <span>выбрано билетов на сумму: </span>
                 <span class="details"></span>
             </div>
-            <table id="select_plase_box" class="select-plase-box">
+            <table id="select-plase-box" class="select-plase-box">
                 ${rowsAndSeats}
             </table>
             <div class="div-button">
-                <a class="clear_seats" href="">Отменить выбор</a>
-                <a href="">Продать</a>
-                <a href="">Бронь</a>
-                <a href="">Освободить</a>
-                <a href="">Исключить</a>
+                <button class="btn btn-primary" id="clear_seats" type="button">Отменить выбор</button>
+                <button class="btn btn-primary" id="sell" type="submit">Продать</button>
+                <button class="btn btn-primary" id="booking" type="submit">Бронь</button>
+                <button class="btn btn-primary" id="clear" type="submit">Освободить</button>
+                <button class="btn btn-primary" id="desable" type="submit">Исключить</button>
             </div>
         </div>
     </div><!--content-->

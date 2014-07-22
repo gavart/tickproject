@@ -102,7 +102,7 @@ public class Generation {
             }
             else {
                 if(ticket.getStatus()== null) {
-                    seat = "<td class=\"active\" id=\""+ticket.getRowAndSeat().getId()+"\" rowText=\""+ ticket.getRowAndSeat().getRow()+"\" seatText=\""+String.format("%d", ticket.getRowAndSeat().getSeat())+"\" priceSeat=\""+ticket.getPrice().getPrice()+"\" >"+ String.format("%d", ticket.getRowAndSeat().getSeat())+"</td>";//String.format("%d",ticket.getSeat());
+                    seat = "<td title =\""+"ряд: "+ticket.getRowAndSeat().getRow()+"\"class=\"active\" id=\""+ticket.getRowAndSeat().getId()+"\" rowText=\""+ ticket.getRowAndSeat().getRow()+"\" seatText=\""+String.format("%d", ticket.getRowAndSeat().getSeat())+"\" priceSeat=\""+ticket.getPrice().getPrice()+"\" >"+ String.format("%d", ticket.getRowAndSeat().getSeat())+"</td>";//String.format("%d",ticket.getSeat());
                 } else {
                     seat = "<td class=\"" + ticket.getStatus().getStatus() + "\" id=\""+ticket.getRowAndSeat().getId()+"\" rowText=\""+ ticket.getRowAndSeat().getRow()+"\" seatText=\""+String.format("%d", ticket.getRowAndSeat().getSeat())+"\" priceSeat=\""+ticket.getPrice().getPrice()+"\" >"+ String.format("%d", ticket.getRowAndSeat().getSeat())+"</td>";//String.format("%d",ticket.getSeat());
                 }

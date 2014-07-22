@@ -30,6 +30,7 @@
   background-color: transparent;
   border: 0;
 }
+/*ssss*/
 
 .input-block-level {
   display: block;
@@ -50,7 +51,7 @@ header,
 hgroup,
 nav,
 section {
-  display: block;
+  /*display: block;*/
 }
 
 audio,
@@ -1074,7 +1075,7 @@ label {
   display: block;
   margin-bottom: 5px;
 }
-
+/*
 select,
 textarea,
 input[type="text"],
@@ -1160,9 +1161,9 @@ input[type="color"]:focus,
 .uneditable-input:focus {
   border-color: rgba(82, 168, 236, 0.8);
   outline: 0;
-  outline: thin dotted \9;
+  outline: thin dotted \9;*/
   /* IE6-9 */
-
+/*
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
      -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
@@ -1188,13 +1189,13 @@ input[type="checkbox"] {
 
 select,
 input[type="file"] {
-  height: 30px;
+  height: 30px;*/
   /* In IE7, the height of the select element cannot be changed by height, only font-size */
 
-  *margin-top: 4px;
+ /* *margin-top: 4px;*/
   /* For IE7, add top margin to align select with labels */
 
-  line-height: 30px;
+ /* line-height: 30px;
 }
 
 select {
@@ -1281,7 +1282,7 @@ textarea::-webkit-input-placeholder {
 .radio.inline + .radio.inline,
 .checkbox.inline + .checkbox.inline {
   margin-left: 10px;
-}
+}*/
 
 .input-mini {
   width: 60px;
@@ -1306,7 +1307,7 @@ textarea::-webkit-input-placeholder {
 .input-xxlarge {
   width: 530px;
 }
-
+/*
 input[class*="span"],
 select[class*="span"],
 textarea[class*="span"],
@@ -1337,11 +1338,11 @@ textarea,
 .uneditable-input {
   margin-left: 0;
 }
-
+*/
 .controls-row [class*="span"] + [class*="span"] {
   margin-left: 20px;
 }
-
+/*
 input.span12,
 textarea.span12,
 .uneditable-input.span12 {
@@ -1412,7 +1413,7 @@ input.span1,
 textarea.span1,
 .uneditable-input.span1 {
   width: 46px;
-}
+}*/
 
 .controls-row {
   *zoom: 1;
@@ -1937,6 +1938,7 @@ input.search-query {
 }
 
 .control-group {
+    /*тут*/
   margin-bottom: 10px;
 }
 
@@ -1946,7 +1948,7 @@ legend + .control-group {
 }
 
 .form-horizontal .control-group {
-  margin-bottom: 20px;
+  margin-bottom: 20px;/*тут*/
   *zoom: 1;
 }
 
@@ -1996,6 +1998,8 @@ legend + .control-group {
   padding-left: 180px;
 }
 
+
+/*ssss*/
 table {
   max-width: 100%;
   background-color: transparent;
@@ -6165,7 +6169,9 @@ a.badge:focus {
 .invisible {
   visibility: hidden;
 }
-
+.visible {
+  visibility: visible;
+}
 .affix {
   position: fixed;
 }

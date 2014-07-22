@@ -23,15 +23,16 @@ $(document).ready(function() {
         $.each(checkedElements, function(){
             rowsAndSeatsArray.push($(this).attr('rowAndSeatID'));
         });
-        //console.log(rowsAndSeatsArray);
+        console.log(rowsAndSeatsArray);
         sendSoldTickets(rowsAndSeatsArray);
         checkedElements.removeClass('active').removeClass('checked').addClass('sold');
         $('span.details').html('');
     });
 });
-function sendSoldTickets(arrayRowAndSeatsID){
-    $.post('http://localhost:8088/tickproject.ua/sellSeats',
-        {actionID: localStorage.getItem('current-action'), rowandseatsID:arrayRowAndSeatsID},
+function sendSoldTickets(rowandseatsID){
+    console.log(rowandseatsID);
+    $.post('http://localhost:8080/tickproject.ua/sellseats',
+        {"actionID": localStorage.getItem('current-action'), "rowandseatsID[]":rowandseatsID},
         function(serverResponse) {
             alert(serverResponse);
         });

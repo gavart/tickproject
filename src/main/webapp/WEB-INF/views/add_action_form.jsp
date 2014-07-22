@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: apple
@@ -11,6 +12,7 @@
 <jsp:include page="menu.jsp" />
     <div id="content" class="min-height-content">
         <div class="transparent-div">
+
             <form class="form-horizontal" id="form_add_action" method="get" action="${pageContext.request.contextPath}/addaction">
                 <fieldset>
                     <div id="legend">
@@ -35,13 +37,17 @@
                         <!-- CheckBox and Button -->
                         <div class="controls">
                             <label class="checkbox">
-                                <input type="checkbox" value="remember-me" id="isNewPrices"> установить новые цены
+                                <input type="checkbox" value="true" id="isNewPrices" name="isNewPrices" /> установить новые цены
                             </label>
+
+                            <jsp:include page="set_prices.jsp" />
                             <button class="btn btn-primary" id="addActionButton" type="submit">Создать мероприятие</button>
                         </div>
                     </div>
+
                 </fieldset>
             </form>
+
         </div>
     </div><!--content-->
 

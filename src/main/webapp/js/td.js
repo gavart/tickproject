@@ -18,8 +18,21 @@ $(document).ready(function() {
     });
 
     $('#sell').on('click', function(){
-        var elementsArray = $('td.checked').unbind('click');
-        elementsArray.removeClass('active').removeClass('checked').addClass('sold');
+        var checkedElements = $('td.checked').unbind('click');
+        var rowsAndSeatsArray = new Array();
+        $.each(checkedElements, function(){
+            rowsAndSeatsArray.push($(this).attr('rowAndSeatID'));
+        });
+        //console.log(rowsAndSeatsArray);
+        sendSoldTickets(rowsAndSeatsArray);
+        checkedElements.removeClass('active').removeClass('checked').addClass('sold');
         $('span.details').html('');
     });
 });
+function sendSoldTickets(arrayRowAndSeatsID){
+    $.post('http://localhost:8088/tickproject.ua/sellSeats',
+        {actionID: localStorage.getItem('current-action'), rowandseatsID:arrayRowAndSeatsID},
+        function(serverResponse) {
+            alert(serverResponse);
+        });
+}

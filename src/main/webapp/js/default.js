@@ -9,4 +9,5 @@ $(document).ready(function() {
                 '<td><input name="descriptions['+ sectionIndex + ']" type="text" size="100" style="color: #777;" value="Описание сектора" /></td>'+
                 '</tr>');
     });
+    console.log($('oneAction').attr('data-actionId'));
 });

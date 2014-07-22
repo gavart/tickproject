@@ -19,5 +19,6 @@
             </div>
         </div>
     </div><!--content-->
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/localS.js" charset="UTF-8"></script>
 
 <jsp:include page="footer.jsp" />

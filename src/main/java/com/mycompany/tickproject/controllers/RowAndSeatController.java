@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -82,23 +83,47 @@ public class RowAndSeatController {
         }
     }
 ///sellseat?idsection=27&idaction=2&idstadium=1&idseat=76202
-    @RequestMapping(value = "/sellseat", method = RequestMethod.GET)
+    @RequestMapping(value = "/sellseats", method = RequestMethod.GET)
     public String sellSeat(HttpServletRequest request, HttpServletResponse response,Model map) {
+        String[] rowandseatIDs = request.getParameterValues("rowandseatsID");
+        //String pricesID = request.getParameter("priceID");
+        int actionID = Integer.parseInt(request.getParameter("actionID"));
+            for(int i=0; i < rowandseatIDs.length; i++) {
+                RowAndSeat rowAndSeat = facadeService.getRowAndSeatService().getRowAndSeat(Integer.parseInt(rowandseatIDs[i]));
+                Action action = facadeService.getActionService().getAction(actionID);
+                Status status = new Status();
+                status.setId(3);// 3 = sold
+                Price price = facadeService.getPriceService().getActualPrice(rowAndSeat.getSectionOfStadium().getId(),actionID);
+                Customer customer = new Customer();
+                customer.setId(1);//1 = default customer
+                Ticket ticket = new Ticket();
+                ticket.setSectionOfStadium(rowAndSeat.getSectionOfStadium());
+                ticket.setStadium(action.getStadium());
+                ticket.setRowAndSeat(rowAndSeat);
+                ticket.setAction(action);
+                ticket.setStatus(status);
+                ticket.setCustomer(customer);
+                ticket.setPrice(price);
+                facadeService.getTicketService().sellTicket(ticket);
+            }
+
+        /*
         int sectionID =Integer.parseInt(request.getParameter("idsection"));
-        int actionID = Integer.parseInt(request.getParameter("idaction"));
+
         int stadiumID = Integer.parseInt(request.getParameter("idstadium"));
         int seatID = Integer.parseInt(request.getParameter("idseat"));
+
         Ticket ticket = new Ticket();
         RowAndSeat rowAndSeat = new RowAndSeat();
         rowAndSeat.setId(seatID);
         Action action = new Action();
         action.setId(actionID);
         Status status = new Status();
-        status.setId(3);
+        status.setId(3);// 3 = sold
         Stadium stadium = new Stadium();
         stadium.setId(stadiumID);
         Customer customer = new Customer();
-        customer.setId(1);
+        customer.setId(1);//1 = default customer
         SectionOfStadium sectionOfStadium = new SectionOfStadium();
         sectionOfStadium.setId(sectionID);
         ticket.setSectionOfStadium(sectionOfStadium);
@@ -108,8 +133,8 @@ public class RowAndSeatController {
         ticket.setStatus(status);
         ticket.setCustomer(customer);
         ticket.setPrice(facadeService.getPriceService().getActualPrice(sectionID,actionID));
-        facadeService.getTicketService().sellTicket(ticket);
-        return "redirect:index";
+        facadeService.getTicketService().sellTicket(ticket);*/
+        return "";
     }
 
     @RequestMapping(value = "/showseats", method = RequestMethod.GET)

@@ -40,6 +40,18 @@ public class RowAndSeatServiceImpl implements RowAndSeatService {
     }
 
     /**
+     * This method gets an object from the database by id and returns an object of {@link com.mycompany.tickproject.models.RowAndSeat}
+     *
+     * @param id id an object of {@link com.mycompany.tickproject.models.RowAndSeat}
+     * @return an object of {@link com.mycompany.tickproject.models.RowAndSeat}
+     */
+    @Transactional
+    @Override
+    public RowAndSeat getRowAndSeat(int id) {
+        return facadeDAO.getRowAndSeatDAO().getRowAndSeat(id);
+    }
+
+    /**
      * This method get objects of {@link com.mycompany.tickproject.models.RowAndSeat} from the database by id an object of {@link com.mycompany.tickproject.models.SectionOfStadium} and return list with objects of {@link com.mycompany.tickproject.models.RowAndSeat}
      *
      * @param sectionId id an object of {@link com.mycompany.tickproject.models.SectionOfStadium}

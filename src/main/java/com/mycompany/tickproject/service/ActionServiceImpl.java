@@ -73,4 +73,17 @@ public class ActionServiceImpl implements ActionService {
     public List<Action> getActions() {
         return facadeDAO.getActionDAO().getActions();
     }
+
+    /**
+     * This method gets an object from the database by id and make it action not active
+     *
+     * @param id id an object of {@link com.mycompany.tickproject.models.Action}
+     */
+    @Transactional
+    @Override
+    public void makeNotActiveAction(int id) {
+        facadeDAO.getActionDAO().makeNotActiveAction(id);
+    }
+
+
 }

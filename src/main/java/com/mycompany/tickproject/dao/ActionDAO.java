@@ -40,6 +40,12 @@ public interface ActionDAO {
      * @return list with objects of {@link com.mycompany.tickproject.models.Action}
      */
     public List<Action> getActions();
+
+    /** This method gets an object from the database by id and make it action not active
+     *
+     * @param id id an object of {@link com.mycompany.tickproject.models.Action}
+     */
+    public void makeNotActiveAction(int id);
 }
 
 

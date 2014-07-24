@@ -86,4 +86,20 @@ public class ActionDAOImpl implements ActionDAO {
         List<Action> actionList = (List<Action>) session.createSQLQuery("SELECT * FROM Actions WHERE isActive=true ORDER BY date_time_action").addEntity(Action.class).list();
         return actionList;
     }
+
+    /**
+     * This method gets an object from the database by id and make it action not active
+     *
+     * @param id id an object of {@link com.mycompany.tickproject.models.Action}
+     */
+    @Override
+    public void makeNotActiveAction(int id) {
+        Session session = null;
+        try {
+            session = sessionFactory.getCurrentSession();
+            session.createSQLQuery("UPDATE Actions SET isActive=0 WHERE id="+id).executeUpdate();
+        } catch (HibernateException he) {
+            he.printStackTrace();
+        }
+    }
 }

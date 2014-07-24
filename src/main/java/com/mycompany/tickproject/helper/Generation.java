@@ -33,7 +33,19 @@ public class Generation {
         SimpleDateFormat ftTime = new SimpleDateFormat ("HH:mm");
 
         for(Action action:actionList) {
-            paintedActions.append("<li class=\"action\"><a  data-actionId =\""+action.getId()+"\" href=\""+contextPath+"/getsections?idaction="+action.getId()+"&idstadium="+action.getStadium().getId()+"\" ><span class=\"dateAction\">"+ftDate.format(action.getDateTimeAction()) +"</span> в <span class=\"timeAction\">"+ftTime.format(action.getDateTimeAction())+"</span> Стадион:<span class=\"placeAction\">"+action.getStadium().getName()+"</span><div class=\"nameAction\">"+action.getNameAction()+"</div></a></li>");
+            paintedActions.append("<li class=\"action\">" +
+                    "<span class=\"actionButtons\" >\n" +
+                    "<a href=\""+contextPath+"/edit_action_form?id_action="+action.getId()+"\" >Редактировать</a>" +
+                    "<a href=\""+contextPath+"/remove_action?id_action="+action.getId()+"\" >Убрать</a>" +
+                    /*"                                          //  out.println(\"<input data-edit=\\\"\"+article.getArticleId()+\"\\\" type=\\\"button\\\" class=\\\"btn btn-warning\\\" value=\\\"Редактировать\\\">\");\n" +
+                    "                                            out.println(\"<input data-edit=\\\"\"+article.getArticleId()+\"\\\" class=\\\"btn-link\\\" type=\\\"button\\\" value=\\\"Редактировать\\\">\");\n" +
+                    "                                            out.println(\"<input data-delete=\\\"\"+article.getArticleId()+\"\\\" type=\\\"button\\\" class=\\\"btn btn-link\\\" value=\\\"Удалить\\\">\");\n" +*/
+                    "</span>" +
+                    "<a class=\"linktosection\" data-actionId =\""+action.getId()+"\" href=\""+contextPath+"/getsections?idaction="+action.getId()+"&idstadium="+action.getStadium().getId()+"\" >" +
+                    "<span class=\"dateAction\">"+ftDate.format(action.getDateTimeAction()) +"</span> в <span class=\"timeAction\">"+ftTime.format(action.getDateTimeAction())+"</span> Стадион:<span class=\"placeAction\">"+action.getStadium().getName()+"</span>" +
+                    "<div class=\"nameAction\">"+action.getNameAction()+"" +
+
+                    "</div></a></li>");
         }
         return paintedActions.toString();
     }
@@ -58,7 +70,7 @@ public class Generation {
         StringBuilder paintedRowsAndSeats = new StringBuilder("");
         int row1 = 0;
         int row2 = 0;
-        for(RowAndSeat ras: (List<RowAndSeat>)list) {
+        for(RowAndSeat ras: list) {
             row2 = ras.getRow();
             String seat="";
 

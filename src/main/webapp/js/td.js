@@ -1,3 +1,4 @@
+var URL = "http://localhost:8080/tickproject.ua";
 $(document).ready(function() {
     $(document).tooltip();
     $('span.details').html('');
@@ -31,7 +32,7 @@ $(document).ready(function() {
 });
 function sendSoldTickets(rowandseatsID){
     console.log(rowandseatsID);
-    $.post('http://localhost:8080/tickproject.ua/sellseats',
+    $.post(URL+'/sellseats',
         {"actionID": localStorage.getItem('current-action'), "rowandseatsID[]":rowandseatsID},
         function(serverResponse) {
             alert(serverResponse);

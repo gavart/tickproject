@@ -1,3 +1,4 @@
+var URL = "http://localhost:8080/tickproject.ua";
 $(document).ready(function() {
     //add more file components if Add is clicked
     $('#addSection').click(function() {

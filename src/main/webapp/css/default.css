@@ -124,3 +124,16 @@ body
 #setPricesDIV {
 
 }
+
+.actionButtons {
+
+}
+li.actionButtons{
+    float: right;
+    position: absolute;
+    right: 15px;
+    text-decoration: none;
+    width: 30px;
+    height: 10px;
+    border: 1px solid red;
+}

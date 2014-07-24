@@ -24,7 +24,8 @@ li.action{
     list-style-type: none;
     margin: 0 0 13px 0;
 }
-li.action a{
+/*li.action a*/
+.linktosection{
     border: solid darkred 1px;
     display: block;
     border-radius: 20px;

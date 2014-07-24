@@ -53,7 +53,7 @@ public class ActionController {
         action.setIsActive(true);
         action.setDateTimeAction(Timestamp.valueOf(dateAction));
 
-        facadeService.getActionService().addAction(action);
+        //facadeService.getActionService().addAction(action);
         Action lastAddedAction = facadeService.getActionService().getLastAddedAction();
         if(isNewPrices==false) {
             List<Price> defaultPrices = facadeService.getPriceService().getPrices(1);//default actionID = 1
@@ -62,7 +62,7 @@ public class ActionController {
                 newPrice.setSectionOfStadium(price.getSectionOfStadium());
                 newPrice.setAction(lastAddedAction);
                 newPrice.setPrice(price.getPrice());
-                facadeService.getPriceService().addPrice(newPrice);
+                //facadeService.getPriceService().addPrice(newPrice);
             }
         } else {
             for(int i=0; i < prices.size(); i++ ) {
@@ -72,7 +72,7 @@ public class ActionController {
                 newPrice.setSectionOfStadium(sectionOfStadium);
                 newPrice.setAction(lastAddedAction);
                 newPrice.setPrice(prices.get(i));
-                facadeService.getPriceService().addPrice(newPrice);
+                //facadeService.getPriceService().addPrice(newPrice);
             }
 
         }

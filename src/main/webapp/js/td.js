@@ -1,21 +1,21 @@
 var URL = "http://localhost:8080/tickproject.ua";
 $(document).ready(function() {
+    disableButton();
     $(document).tooltip();
-    $('span.details').html('');
 
-    $('td').not('.row_title').not('.sold').on('click', function(){
+    $('td').not('.row_title').on('click', function(){
         $(this).toggleClass('checked');
-        var tdCheck = $('td.checked');
-        var summ = 0;
-        $.each(tdCheck, function(index, element) {
-            summ += parseFloat(tdCheck.attr('priceseat'));
-        });
-        $('span.details').html(summ);
+        var checkedElements = $('td.checked');
+        validSelection(checkedElements);
     });
 
-    $('#clear_seats').on('click', function(){
+    $('#clear_pick').on('click', function(){
         $('td.checked').removeClass('checked');
-        $('span.details').html('');
+    });
+
+    $('#booking').on('click', function(){
+        var checkedElements = $('td.checked');
+        checkedElements.removeClass('active').removeClass('checked').addClass('booked');
     });
 
     $('#sell').on('click', function(){
@@ -24,10 +24,8 @@ $(document).ready(function() {
         $.each(checkedElements, function(){
             rowsAndSeatsArray.push($(this).attr('rowAndSeatID'));
         });
-        console.log(rowsAndSeatsArray);
         sendSoldTickets(rowsAndSeatsArray);
-        checkedElements.removeClass('active').removeClass('checked').addClass('sold');
-        $('span.details').html('');
+        checkedElements.removeClass('active').removeClass('checked').removeClass('booked').addClass('sold');
     });
 });
 function sendSoldTickets(rowandseatsID){
@@ -37,4 +35,43 @@ function sendSoldTickets(rowandseatsID){
         function(serverResponse) {
             alert(serverResponse);
         });
+}
+function validSelection(arrayElements){
+    console.log(arrayElements);
+    if (($(arrayElements).hasClass('active') && $(arrayElements).hasClass('sold') && $(arrayElements).hasClass('booked'))
+        ||
+        ($(arrayElements).hasClass('active') && $(arrayElements).hasClass('sold'))
+        ||
+        ($(arrayElements).hasClass('sold') && $(arrayElements).hasClass('booked'))
+        ||
+        ($(arrayElements).hasClass('active') && $(arrayElements).hasClass('booked'))
+        ||
+        ($(arrayElements).length == 0)
+        )
+        {
+           disableButton();
+        }
+    else if ($(arrayElements).hasClass('sold'))
+        {
+            $('#booking').attr('disabled', true);
+        }
+    else if ($(arrayElements).hasClass('booked'))
+    {
+        enableButton();
+        $('#booking').attr('disabled', true);
+    }
+    else
+        {
+            enableButton();
+        }
+}
+function disableButton(){
+    $('#sell').attr('disabled', true);
+    $('#booking').attr('disabled', true);
+    /*added code for div massage*/
+    console.log('disabled button with id #sell and #booking');
+}
+function enableButton(){
+    $('#sell').removeAttr('disabled');
+    $('#booking').removeAttr('disabled');
 }

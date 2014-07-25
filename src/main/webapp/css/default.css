@@ -60,9 +60,13 @@ body
 
 .select-plase-box td.sold {
     background: #35aab5 !important;
-    cursor: default;
 }
-
+.select-plase-box td.sold.checked{
+    background: #bd362f !important;
+}
+.select-plase-box td.booked.checked{
+    background: #bd362f !important;
+}
 
 .select-section-box {
     border-collapse: collapse;

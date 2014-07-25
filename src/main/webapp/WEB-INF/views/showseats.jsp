@@ -21,11 +21,10 @@
                 ${rowsAndSeats}
             </table>
             <div class="div-button">
-                <button class="btn btn-primary" id="clear_seats" type="button">Отменить выбор</button>
+                <button class="btn btn-primary" id="clear_pick" type="button">Отменить выбор</button>
                 <button class="btn btn-primary" id="sell" type="submit">Продать</button>
                 <button class="btn btn-primary" id="booking" type="submit">Бронь</button>
-                <button class="btn btn-primary" id="clear" type="submit">Освободить</button>
-                <button class="btn btn-primary" id="desable" type="submit">Исключить</button>
+                <button class="btn btn-primary" id="return_seats" type="submit">Освободить</button>
             </div>
         </div>
     </div><!--content-->

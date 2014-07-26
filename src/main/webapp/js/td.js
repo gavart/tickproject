@@ -3,7 +3,7 @@ $(document).ready(function() {
     disableButton();
     $(document).tooltip();
 
-    $('td').not('.row_title').on('click', function(){
+    $('td').not('.row_title').not('.table-hover').on('click', function(){
         $(this).toggleClass('checked');
         var checkedElements = $('td.checked');
         validSelection(checkedElements);
@@ -19,22 +19,25 @@ $(document).ready(function() {
     });
 
     $('#sell').on('click', function(){
-        var checkedElements = $('td.checked').unbind('click');
+        var checkedElements = $('td.checked');
         var rowsAndSeatsArray = new Array();
         $.each(checkedElements, function(){
             rowsAndSeatsArray.push($(this).attr('rowAndSeatID'));
         });
         sendSoldTickets(rowsAndSeatsArray);
         checkedElements.removeClass('active').removeClass('checked').removeClass('booked').addClass('sold');
+        disableButton();
     });
 });
+function onAjax(data) {
+    alert(data);
+}
 function sendSoldTickets(rowandseatsID){
-    console.log(rowandseatsID);
+    //console.log(rowandseatsID);
     $.post(URL+'/sellseats',
         {"actionID": localStorage.getItem('current-action'), "rowandseatsID[]":rowandseatsID},
-        function(serverResponse) {
-            alert(serverResponse);
-        });
+        onAjax
+    );
 }
 function validSelection(arrayElements){
     console.log(arrayElements);
@@ -53,7 +56,7 @@ function validSelection(arrayElements){
         }
     else if ($(arrayElements).hasClass('sold'))
         {
-            $('#booking').attr('disabled', true);
+            disableButton();
         }
     else if ($(arrayElements).hasClass('booked'))
     {

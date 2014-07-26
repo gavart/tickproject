@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
@@ -84,7 +85,7 @@ public class RowAndSeatController {
     }
 ///sellseat?idsection=27&idaction=2&idstadium=1&idseat=76202
     @RequestMapping(value = "/sellseats", method = RequestMethod.POST)
-    public String sellSeat(HttpServletRequest request, HttpServletResponse response,Model map) {
+    public @ResponseBody String sellSeat(HttpServletRequest request, HttpServletResponse response,Model map) {
         int actionID = Integer.parseInt(request.getParameter("actionID"));
         String[] rowandseatIDs = request.getParameterValues("rowandseatsID[]");
         //String pricesID = request.getParameter("priceID");

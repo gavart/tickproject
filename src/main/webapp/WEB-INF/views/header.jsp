@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/normalize.css" type="text/css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" type="text/css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" type="text/css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.css" type="text/css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css" type="text/css" />
         <!--<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" />-->
 

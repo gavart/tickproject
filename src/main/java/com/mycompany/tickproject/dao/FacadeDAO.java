@@ -18,6 +18,10 @@ public class FacadeDAO {
     private ActionDAO actionDAO;
     private PriceDAO priceDAO;
 
+
+
+    private CustomerDAO customerDAO;
+
     @Autowired
     public void setRowAndSeatDAO(RowAndSeatDAO rowAndSeatDAO) {
         this.rowAndSeatDAO = rowAndSeatDAO;
@@ -65,4 +69,10 @@ public class FacadeDAO {
     public PriceDAO getPriceDAO() {
         return priceDAO;
     }
+
+    @Autowired
+    public void setCustomerDAO(CustomerDAO customerDAO) {
+        this.customerDAO = customerDAO;
+    }
+    public CustomerDAO getCustomerDAO() {return this.customerDAO;}
 }

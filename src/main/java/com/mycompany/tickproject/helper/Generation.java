@@ -5,10 +5,7 @@ import com.mycompany.tickproject.models.RowAndSeat;
 import com.mycompany.tickproject.models.SectionOfStadium;
 import com.mycompany.tickproject.models.Ticket;
 
-import javax.validation.constraints.Null;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /** This class provides method that are used to generate in the correct order rows and seats
@@ -22,7 +19,7 @@ public class Generation {
 
         SimpleDateFormat ftDate = new SimpleDateFormat ("yyyy-MM-dd");
         SimpleDateFormat ftTime = new SimpleDateFormat ("HH:mm");
-        paintedAction.append("<div id=\"oneAction\" data-actionId =\""+action.getId()+"\"><span class=\"dateAction\">"+ftDate.format(action.getDateTimeAction()) +"</span> в <span class=\"timeAction\">"+ftTime.format(action.getDateTimeAction())+"</span> Стадион:<span class=\"placeAction\">"+action.getStadium().getName()+"</span><div class=\"nameAction\">"+action.getNameAction()+"</div></div>");
+        paintedAction.append("<div id=\"oneAction\" data-actionId =\""+action.getId()+"\"><span class=\"dateAction\">"+ftDate.format(action.getStartDateTimeAction()) +"</span> в <span class=\"timeAction\">"+ftTime.format(action.getStartDateTimeAction())+"</span> Стадион:<span class=\"placeAction\">"+action.getStadium().getName()+"</span><div class=\"nameAction\">"+action.getNameAction()+"</div></div>");
         return paintedAction.toString();
     }
 
@@ -42,7 +39,7 @@ public class Generation {
                     "                                            out.println(\"<input data-delete=\\\"\"+article.getArticleId()+\"\\\" type=\\\"button\\\" class=\\\"btn btn-link\\\" value=\\\"Удалить\\\">\");\n" +*/
                     "</span>" +
                     "<a class=\"linktosection\" data-actionId =\""+action.getId()+"\" href=\""+contextPath+"/getsections?idaction="+action.getId()+"&idstadium="+action.getStadium().getId()+"\" >" +
-                    "<span class=\"dateAction\">"+ftDate.format(action.getDateTimeAction()) +"</span> в <span class=\"timeAction\">"+ftTime.format(action.getDateTimeAction())+"</span> Стадион:<span class=\"placeAction\">"+action.getStadium().getName()+"</span>" +
+                    "<span class=\"dateAction\">"+ftDate.format(action.getStartDateTimeAction()) +"</span> в <span class=\"timeAction\">"+ftTime.format(action.getStartDateTimeAction())+"</span> Стадион:<span class=\"placeAction\">"+action.getStadium().getName()+"</span>" +
                     "<div class=\"nameAction\">"+action.getNameAction()+"" +
 
                     "</div></a></li>");
@@ -114,9 +111,9 @@ public class Generation {
             }
             else {
                 if(ticket.getStatus()== null) {
-                    seat = "<td  title =\""+"ряд: "+ticket.getRowAndSeat().getRow()+"\"class=\"active\" rowAndSeatID=\""+ticket.getRowAndSeat().getId()+"\" rowText=\""+ ticket.getRowAndSeat().getRow()+"\" seatText=\""+String.format("%d", ticket.getRowAndSeat().getSeat())+"\" priceSeat=\""+ticket.getPrice().getPrice()+"\" priceID=\""+ticket.getPrice().getId()+"\"  >"+ String.format("%d", ticket.getRowAndSeat().getSeat())+"</td>";//String.format("%d",ticket.getSeat());
+                    seat = "<td  title =\""+"ряд: "+ticket.getRowAndSeat().getRow()+"\"class=\"active\" rowAndSeatID=\""+ticket.getRowAndSeat().getId()+"\" rowText=\""+ ticket.getRowAndSeat().getRow()+"\" seatText=\""+String.format("%d", ticket.getRowAndSeat().getSeat())+"\" priceSeat=\""+ticket.getPrice().getPrice()+"\" priceID=\""+ticket.getPrice().getId()+"\" customerID=\"\"  >"+ String.format("%d", ticket.getRowAndSeat().getSeat())+"</td>";//String.format("%d",ticket.getSeat());
                 } else {
-                    seat = "<td title =\""+"ряд: "+ticket.getRowAndSeat().getRow()+"\" class=\"" + ticket.getStatus().getStatus() + "\" rowAndSeatID=\""+ticket.getRowAndSeat().getId()+"\" rowText=\""+ ticket.getRowAndSeat().getRow()+"\" seatText=\""+String.format("%d", ticket.getRowAndSeat().getSeat())+"\" priceSeat=\""+ticket.getPrice().getPrice()+"\" priceID=\""+ticket.getPrice().getId()+"\"  >"+ String.format("%d", ticket.getRowAndSeat().getSeat())+"</td>";//String.format("%d",ticket.getSeat());
+                    seat = "<td title =\""+"ряд: "+ticket.getRowAndSeat().getRow()+"\" class=\"" + ticket.getStatus().getStatus() + "\" rowAndSeatID=\""+ticket.getRowAndSeat().getId()+"\" rowText=\""+ ticket.getRowAndSeat().getRow()+"\" seatText=\""+String.format("%d", ticket.getRowAndSeat().getSeat())+"\" priceSeat=\""+ticket.getPrice().getPrice()+"\" priceID=\""+ticket.getPrice().getId()+"\" customerID=\""+ticket.getCustomer().getId()+"\"  >"+ String.format("%d", ticket.getRowAndSeat().getSeat())+"</td>";//String.format("%d",ticket.getSeat());
                 }
             }
             if(row1==0) {

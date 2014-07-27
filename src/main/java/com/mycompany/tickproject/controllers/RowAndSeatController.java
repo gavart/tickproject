@@ -86,18 +86,34 @@ public class RowAndSeatController {
 ///sellseat?idsection=27&idaction=2&idstadium=1&idseat=76202
     @RequestMapping(value = "/sellseats", method = RequestMethod.POST)
     public @ResponseBody String sellSeat(HttpServletRequest request, HttpServletResponse response,Model map) {
+        String msg="";
         int actionID = Integer.parseInt(request.getParameter("actionID"));
         String[] rowandseatIDs = request.getParameterValues("rowandseatsID[]");
-        //String pricesID = request.getParameter("priceID");
+        String customerName = request.getParameter("firstName");
+        String customerLastName = request.getParameter("lastName");
+        String statusID =request.getParameter("statusID");
+        Customer customer = new Customer();
+        if(Integer.parseInt(statusID)==2) {
+            customer.setFirstName(customerName);
+            customer.setLastName(customerLastName);
+            customer.setPhoneNumber("0");
+            facadeService.getCustomerService().addCustomer(customer);
+            customer = facadeService.getCustomerService().getCustomerByNameLastName(customerName,customerLastName);
+            msg=customerLastName+" " + customerName + "успешно забронировал!";
+        } else {
+            customer.setId(1);//1 = default customer
+            msg="Операция продажи прошла успешно!";
+        }
+
+
 
             for(int i=0; i < rowandseatIDs.length; i++) {
                 RowAndSeat rowAndSeat = facadeService.getRowAndSeatService().getRowAndSeat(Integer.parseInt(rowandseatIDs[i]));
                 Action action = facadeService.getActionService().getAction(actionID);
                 Status status = new Status();
-                status.setId(3);// 3 = sold
+                status.setId(Integer.parseInt(statusID));// 3 = sold
                 Price price = facadeService.getPriceService().getActualPrice(rowAndSeat.getSectionOfStadium().getId(),actionID);
-                Customer customer = new Customer();
-                customer.setId(1);//1 = default customer
+
                 Ticket ticket = new Ticket();
                 ticket.setSectionOfStadium(rowAndSeat.getSectionOfStadium());
                 ticket.setStadium(action.getStadium());
@@ -108,36 +124,39 @@ public class RowAndSeatController {
                 ticket.setPrice(price);
                 facadeService.getTicketService().sellTicket(ticket);
             }
-
-        /*
-        int sectionID =Integer.parseInt(request.getParameter("idsection"));
-
-        int stadiumID = Integer.parseInt(request.getParameter("idstadium"));
-        int seatID = Integer.parseInt(request.getParameter("idseat"));
-
-        Ticket ticket = new Ticket();
-        RowAndSeat rowAndSeat = new RowAndSeat();
-        rowAndSeat.setId(seatID);
-        Action action = new Action();
-        action.setId(actionID);
-        Status status = new Status();
-        status.setId(3);// 3 = sold
-        Stadium stadium = new Stadium();
-        stadium.setId(stadiumID);
-        Customer customer = new Customer();
-        customer.setId(1);//1 = default customer
-        SectionOfStadium sectionOfStadium = new SectionOfStadium();
-        sectionOfStadium.setId(sectionID);
-        ticket.setSectionOfStadium(sectionOfStadium);
-        ticket.setStadium(stadium);
-        ticket.setRowAndSeat(rowAndSeat);
-        ticket.setAction(action);
-        ticket.setStatus(status);
-        ticket.setCustomer(customer);
-        ticket.setPrice(facadeService.getPriceService().getActualPrice(sectionID,actionID));
-        facadeService.getTicketService().sellTicket(ticket);*/
-        return "OK";
+        return msg;
     }
+
+
+/*
+    @RequestMapping(value = "/sellseats", method = RequestMethod.POST)
+    public @ResponseBody String sellSeat(HttpServletRequest request, HttpServletResponse response,Model map) {
+        int actionID = Integer.parseInt(request.getParameter("actionID"));
+        String[] rowandseatIDs = request.getParameterValues("rowandseatsID[]");
+        //String pricesID = request.getParameter("priceID");
+
+        for(int i=0; i < rowandseatIDs.length; i++) {
+            RowAndSeat rowAndSeat = facadeService.getRowAndSeatService().getRowAndSeat(Integer.parseInt(rowandseatIDs[i]));
+            Action action = facadeService.getActionService().getAction(actionID);
+            Status status = new Status();
+            status.setId(3);// 3 = sold
+            Price price = facadeService.getPriceService().getActualPrice(rowAndSeat.getSectionOfStadium().getId(),actionID);
+            Customer customer = new Customer();
+            customer.setId(1);//1 = default customer
+            Ticket ticket = new Ticket();
+            ticket.setSectionOfStadium(rowAndSeat.getSectionOfStadium());
+            ticket.setStadium(action.getStadium());
+            ticket.setRowAndSeat(rowAndSeat);
+            ticket.setAction(action);
+            ticket.setStatus(status);
+            ticket.setCustomer(customer);
+            ticket.setPrice(price);
+            facadeService.getTicketService().sellTicket(ticket);
+        }
+        return "OK";
+    }*/
+
+
     /*
     @RequestMapping(value = "/reserveseats", method = RequestMethod.POST)
     public @ResponseBody String reserveSeat(HttpServletRequest request, HttpServletResponse response,Model map) {

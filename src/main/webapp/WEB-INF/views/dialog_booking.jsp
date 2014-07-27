@@ -15,8 +15,8 @@
                 <h4 class="modal-title" id="myModalLabel">Новая бронь</h4>
             </div>
             <div class="modal-body">
-                <input type="text" class="input-medium firstName" placeholder="Фамилия">
-                <input type="text" class="input-medium lastName" placeholder="Имя">
+                <input type="text" class="input-medium lastName" placeholder="Фамилия">
+                <input type="text" class="input-medium firstName" placeholder="Имя">
                 <div><p>Сумма: <span></span></p></div>
                 <table class="table table-hover tickInfo">
                     <thead>

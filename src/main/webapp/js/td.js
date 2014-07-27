@@ -47,8 +47,10 @@ $(document).ready(function() {
                 {
                     if (checkValidTick())
                         {
-                            var rowandseatsID = parseFloat($('.modal-body table tbody tr').attr('rowandseatid'));
-                            sendToServer(2,rowandseatsID);
+                            var rowandseatsID = $('.modal-body table tbody tr').attr('rowandseatid');
+                            var lastName = $('.modal-body input.lastName').val();
+                            var firstName = $('.modal-body input.firstName').val();
+                            sendToServer(2,rowandseatsID,firstName,lastName);
                         }
                     else
                         {
@@ -72,7 +74,7 @@ $(document).ready(function() {
             rowsAndSeatsArray.push($(this).attr('rowAndSeatID'));
         });
         //sendSoldTickets(rowsAndSeatsArray);
-        sendToServer(1, rowsAndSeatsArray,'','');
+        sendToServer(3, rowsAndSeatsArray,'','');
         checkedElements.removeClass('active').removeClass('checked').removeClass('booked').addClass('sold');
         disableButton();
         //location.reload();
@@ -185,5 +187,5 @@ function sendToServer(statusID, rowandseatsIDarray, firstName, lastName) {
         {
             $('#modalCancel').click();
         }
-    location.reload();
+    //location.reload();
 }

@@ -14,6 +14,7 @@ $(document).ready(function() {
     });
 
     $('#booking').on('click', function(){
+
         var checkedElements = $('td.checked');
         var summ = 0;
         var  bookedTbody = $("table.tickInfo tbody").empty();
@@ -31,40 +32,13 @@ $(document).ready(function() {
         $('td.tempA').on('click',function(){
             var seatID = $(this).parent().attr('rowandseatid');
             checkSelection(seatID);
-            summ -= parseFloat($(this).attr('tempPrice'));
-            $('.modal-body p span').text(summ);
             $(this).parent().remove();
+            var summa = 0;
+            $('.modal-body td.tempPrice').each(function(){
+                summa += parseFloat($(this).text());
+            });
+            $('.modal-body p span').text(summa);
         });
-
-        $('#modalCancel').click(function(){
-            $('#select-plase-box td').removeClass('checked');
-            clearModal();
-            disableButton();
-        });
-
-        $('#modalBooking').click(function(){
-            if (validInputBooking())
-                {
-                    if (checkValidTick())
-                        {
-                            var rowandseatsID = $('.modal-body table tbody tr').attr('rowandseatid');
-                            var lastName = $('.modal-body input.lastName').val();
-                            var firstName = $('.modal-body input.firstName').val();
-                            sendToServer(2,rowandseatsID,firstName,lastName);
-                        }
-                    else
-                        {
-                            alert('ОШИБКА!!! Среди выбраных билетов есть проданый');
-                            $('#modalCancel').click();
-                        }
-                    //checkedElements.removeClass('active').removeClass('checked').addClass('booked');
-                }
-            else
-                {
-                    alert('Заполните инормацию о человеке который заказывает бронь!');
-                }
-        });
-
     });
 
     $('#sell').on('click', function(){
@@ -77,7 +51,6 @@ $(document).ready(function() {
         sendToServer(3, rowsAndSeatsArray,'','');
         checkedElements.removeClass('active').removeClass('checked').removeClass('booked').addClass('sold');
         disableButton();
-        //location.reload();
     });
 /*
     $('td.booked').not('.row_title').not('.tickInfo').on('click', function(){
@@ -94,13 +67,48 @@ $(document).ready(function() {
             $(bookedTbody).append('<tr class="trTemplate" rowAndSeatID=\"'+rowAndSeatID+'\">'+'<td class="tempID">'+ number +'</td>'+'<td class="tempRow">'+ rowText +'</td>'+'<td class="tempPlace">'+ seattext +'</td>'+'<td class="tempPrice">'+ price +'</td>'+'<td class="tempA">удалить</td>'+'</tr>');
         });
     });*/
+    $('#modalCancel').click(function(){
+        $('#select-plase-box td').removeClass('checked');
+        clearModal();
+        disableButton();
+    });
+
+    $('#modalBooking').click(function(){
+
+        if (!(($.trim($('.modal-body input.lastName').val()) == '')&&($.trim($('.modal-body input.firstName').val()) == '')))
+        {
+            if (checkValidTick())
+            {
+                var rowandseatsID = new Array();
+                var arrayElemets = $('.modal-body table tbody tr');
+                $.each(arrayElemets, function(){
+                    rowandseatsID.push($(this).attr('rowAndSeatID'));
+                });
+                var lastName = $('.modal-body input.lastName').val();
+                var firstName = $('.modal-body input.firstName').val();
+                sendToServer(2,rowandseatsID,firstName,lastName);
+                disableButton();
+            }
+            else
+            {
+                alert('ОШИБКА!!! Среди выбраных билетов есть проданый');
+                $('#modalCancel').click();
+            }
+            //checkedElements.removeClass('checked').addClass('booked');
+        }
+        else
+        {
+            alert('Заполните инормацию о человеке который заказывает бронь!');
+        }
+    });
 });
 function checkSelection(seatID){
     $('#select-plase-box td[rowandseatid='+seatID+']').toggleClass('checked');
 }
 
 function onAjax(data) {
-    alert(data);
+    location.reload(true);
+    console.log(data);
 }
 /*function sendSoldTickets(rowandseatsID){
     //console.log(rowandseatsID);
@@ -150,12 +158,13 @@ function enableButton(){
     $('#booking').removeAttr('disabled');
     $('#return_seats').removeAttr('disabled');
 }
-$('myModal').on('hidden', function(){
-    clearModal();
+/*
+$('myModal').modal('hidden', function(){
+
 });
 $('myModal').on('show', function(){
     //clearModal();
-});
+});*/
 function clearModal(){
     $("table.tickInfo tbody").empty();
     $('.modal-body input').each(function(){
@@ -163,18 +172,7 @@ function clearModal(){
     });
     $('.modal-body p span').text(0);
 };
-function validInputBooking(){
-    var cout = 0;
-    $('.modal-body input').each(function(){
-        if ($.trim($(this).val()) == ''){
-            cout++;
-        }
-    });
-    if (cout > 1) {
-        return false;
-    }
-    return true;
-}
+
 function checkValidTick(){
     return true;
 }
@@ -187,5 +185,4 @@ function sendToServer(statusID, rowandseatsIDarray, firstName, lastName) {
         {
             $('#modalCancel').click();
         }
-    //location.reload();
 }

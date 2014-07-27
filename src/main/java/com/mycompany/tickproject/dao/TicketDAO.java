@@ -41,11 +41,12 @@ public interface TicketDAO {
      */
     public void sellTicket(Ticket ticket);
 
-    /** This method reserves a ticket by {@link com.mycompany.tickproject.models.Customer#id} and {@link com.mycompany.tickproject.models.Ticket#id}
+    /** This method reserves a ticket
      *
-     * @param ticketID id an object of {@link com.mycompany.tickproject.models.Ticket}
-     * @param customerID id an object of {@link com.mycompany.tickproject.models.Customer}
+     * @param ticket an object of {@link com.mycompany.tickproject.models.Ticket}
      */
-    public void reserveTicket(int ticketID, int customerID);
+    public void reserveTicket(Ticket ticket);
+
+
 }
 

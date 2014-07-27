@@ -33,4 +33,14 @@ public class TicketServiceImpl implements TicketService {
     public void sellTicket(Ticket ticket) {
         facadeDAO.getTicketDAO().sellTicket(ticket);
     }
+
+    /**
+     * This method reserves a ticket
+     *
+     * @param ticket an object of {@link com.mycompany.tickproject.models.Ticket}
+     */
+    @Override
+    public void reserveTicket(Ticket ticket) {
+        facadeDAO.getTicketDAO().reserveTicket(ticket);
+    }
 }

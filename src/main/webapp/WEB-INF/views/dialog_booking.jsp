@@ -15,8 +15,8 @@
                 <h4 class="modal-title" id="myModalLabel">Новая бронь</h4>
             </div>
             <div class="modal-body">
-                <input type="text" class="input-medium" placeholder="Фамилия">
-                <input type="text" class="input-medium" placeholder="Имя">
+                <input type="text" class="input-medium firstName" placeholder="Фамилия">
+                <input type="text" class="input-medium lastName" placeholder="Имя">
                 <div><p>Сумма: <span></span></p></div>
                 <table class="table table-hover tickInfo">
                     <thead>
@@ -31,7 +31,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="modalCancel" class="btn btn-default" data-dismiss="modal">Отменить бронь</button>
-                <button type="button" class="btn btn-primary">Забронировать</button>
+                <button type="button" id="modalBooking" class="btn btn-primary">Забронировать</button>
             </div>
             <script type="text/javascript" src="${pageContext.request.contextPath}/js/booking.js" charset="UTF-8"></script>
         </div>

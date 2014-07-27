@@ -41,7 +41,28 @@ $(document).ready(function() {
             clearModal();
             disableButton();
         });
-        //checkedElements.removeClass('active').removeClass('checked').addClass('booked');
+
+        $('#modalBooking').click(function(){
+            if (validInputBooking())
+                {
+                    if (checkValidTick())
+                        {
+                            var rowandseatsID = parseFloat($('.modal-body table tbody tr').attr('rowandseatid'));
+                            sendToServer(2,rowandseatsID);
+                        }
+                    else
+                        {
+                            alert('ОШИБКА!!! Среди выбраных билетов есть проданый');
+                            $('#modalCancel').click();
+                        }
+                    //checkedElements.removeClass('active').removeClass('checked').addClass('booked');
+                }
+            else
+                {
+                    alert('Заполните инормацию о человеке который заказывает бронь!');
+                }
+        });
+
     });
 
     $('#sell').on('click', function(){
@@ -50,7 +71,8 @@ $(document).ready(function() {
         $.each(checkedElements, function(){
             rowsAndSeatsArray.push($(this).attr('rowAndSeatID'));
         });
-        sendSoldTickets(rowsAndSeatsArray);
+        //sendSoldTickets(rowsAndSeatsArray);
+        sendToServer(1, rowsAndSeatsArray,'','');
         checkedElements.removeClass('active').removeClass('checked').removeClass('booked').addClass('sold');
         disableButton();
     });
@@ -62,13 +84,13 @@ function checkSelection(seatID){
 function onAjax(data) {
     alert(data);
 }
-function sendSoldTickets(rowandseatsID){
+/*function sendSoldTickets(rowandseatsID){
     //console.log(rowandseatsID);
     $.post(URL+'/sellseats',
         {"actionID": localStorage.getItem('current-action'), "rowandseatsID[]":rowandseatsID},
         onAjax
     );
-}
+}*/
 function validSelection(arrayElements){
     console.log(arrayElements);
     if (($(arrayElements).hasClass('active') && $(arrayElements).hasClass('sold') && $(arrayElements).hasClass('booked'))
@@ -123,3 +145,29 @@ function clearModal(){
     });
     $('.modal-body p span').text(0);
 };
+function validInputBooking(){
+    var cout = 0;
+    $('.modal-body input').each(function(){
+        if ($.trim($(this).val()) == ''){
+            cout++;
+        }
+    });
+    if (cout > 1) {
+        return false;
+    }
+    return true;
+}
+function checkValidTick(){
+    return true;
+}
+function sendToServer(statusID, rowandseatsIDarray, firstName, lastName) {
+    $.post(URL+'/sellseats',
+        {"actionID": localStorage.getItem('current-action'), "rowandseatsID[]":rowandseatsIDarray, "firstName": firstName, "lastName": lastName , "statusID": statusID },
+        onAjax
+    );
+    if (statusID == 2)
+        {
+            $('#modalCancel').click();
+        }
+    location.reload();
+}

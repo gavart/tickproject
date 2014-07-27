@@ -3,7 +3,7 @@ $(document).ready(function() {
     disableButton();
     $(document).tooltip();
 
-    $('td').not('.row_title').not('.table-hover').on('click', function(){
+    $('td').not('.row_title').not('.tickInfo').on('click', function(){
         $(this).toggleClass('checked');
         var checkedElements = $('td.checked');
         validSelection(checkedElements);
@@ -77,6 +77,21 @@ $(document).ready(function() {
         disableButton();
         //location.reload();
     });
+/*
+    $('td.booked').not('.row_title').not('.tickInfo').on('click', function(){
+
+        var customerID = $(this).attr('customerID');
+        var arrayBooking = ('td.booked[customerID = '+customerID+']');
+        $.each(arrayBooking, function(index, element){
+            var rowText = $(valueElement).attr('rowText');
+            var seattext = $(valueElement).attr('seattext');
+            var price = parseFloat($(valueElement).attr('priceseat'));
+            var number = index + 1;
+            var rowAndSeatID = $(valueElement).attr('rowandseatid');
+            summ += price;
+            $(bookedTbody).append('<tr class="trTemplate" rowAndSeatID=\"'+rowAndSeatID+'\">'+'<td class="tempID">'+ number +'</td>'+'<td class="tempRow">'+ rowText +'</td>'+'<td class="tempPlace">'+ seattext +'</td>'+'<td class="tempPrice">'+ price +'</td>'+'<td class="tempA">удалить</td>'+'</tr>');
+        });
+    });*/
 });
 function checkSelection(seatID){
     $('#select-plase-box td[rowandseatid='+seatID+']').toggleClass('checked');
@@ -137,7 +152,7 @@ $('myModal').on('hidden', function(){
     clearModal();
 });
 $('myModal').on('show', function(){
-    clearModal();
+    //clearModal();
 });
 function clearModal(){
     $("table.tickInfo tbody").empty();

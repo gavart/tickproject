@@ -36,7 +36,7 @@ $(document).ready(function() {
             $(this).parent().remove();
         });
 
-        $('#modalCancel').on('click',function(){
+        $('#modalCancel').click(function(){
             $('#select-plase-box td').removeClass('checked');
             clearModal();
             disableButton();
@@ -75,6 +75,7 @@ $(document).ready(function() {
         sendToServer(1, rowsAndSeatsArray,'','');
         checkedElements.removeClass('active').removeClass('checked').removeClass('booked').addClass('sold');
         disableButton();
+        //location.reload();
     });
 });
 function checkSelection(seatID){

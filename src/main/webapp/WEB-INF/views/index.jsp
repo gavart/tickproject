@@ -4,7 +4,7 @@
 
 <jsp:include page="header.jsp" />
 <jsp:include page="menu.jsp" />
-
+<jsp:include page="notice.jsp" />
     <div class="content actions min-height-content">
         <div class="transparent-div">
             <!--<a href="${pageContext.request.contextPath}/upload_file_form">Upload Files</a>-->

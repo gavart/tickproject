@@ -8,13 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,12 +29,16 @@ public class ActionController {
     public String addActionForm(HttpServletRequest request, HttpServletResponse response,Model map) {
         List<Price> defaultPrices = facadeService.getPriceService().getPrices(1);//1 default action, get default prices
         map.addAttribute("defaultPrices",defaultPrices);
+        Action defaultAction = facadeService.getActionService().getAction(1);
+        map.addAttribute("defaultAction",defaultAction);
         return "add_action_form";
     }
     @RequestMapping(value = "/addaction", method = RequestMethod.GET)
-    public void addAction(@ModelAttribute("sectionForm") ActionForm actionForm,HttpServletRequest request, HttpServletResponse response,Model map) {
+    public String addAction(@ModelAttribute("addActionForm") ActionForm actionForm, HttpServletRequest request, HttpServletResponse response,Model map, RedirectAttributes redirectAttributes) {
         String name = request.getParameter("nameaction");//"Черноморец - Олимпик";//
-        String dateAction = request.getParameter("datetimeaction").replace("T"," ")+":00";//"2014-07-26 19:00:00";//Timestamp dateAction;
+        String startDateTimeAction = request.getParameter("startdatetimeaction").replace("T"," ")+":00";//"2014-07-26 19:00:00";//Timestamp startDateTimeAction;
+        String endDateTimeAction = request.getParameter("enddatetimeaction").replace("T"," ")+":00";
+        String timelimitbooking = "2014-07-26 "+request.getParameter("timelimitbooking")+":00";
         Boolean isNewPrices = Boolean.valueOf(request.getParameter("isNewPrices"));
         boolean a = Boolean.parseBoolean(request.getParameter("isNewPrices"));
         String a2 = request.getParameter("isNewPrices");
@@ -43,15 +46,15 @@ public class ActionController {
         List<Integer> actionsId = actionForm.getActionsId();
         List<BigDecimal> prices = actionForm.getPrices();
 
-
-
         Action action = new Action();
         Stadium stadium = new Stadium();
         stadium.setId(1); //Chernomorets = 1
         action.setNameAction(name);
         action.setStadium(stadium);
         action.setIsActive(true);
-        action.setDateTimeAction(Timestamp.valueOf(dateAction));
+        action.setStartDateTimeAction(Timestamp.valueOf(startDateTimeAction));
+        action.setEndDateTimeAction(Timestamp.valueOf(endDateTimeAction));
+        action.setTimeLimitBooking(Timestamp.valueOf(timelimitbooking));
 
         facadeService.getActionService().addAction(action);
         Action lastAddedAction = facadeService.getActionService().getLastAddedAction();
@@ -64,6 +67,7 @@ public class ActionController {
                 newPrice.setPrice(price.getPrice());
                 facadeService.getPriceService().addPrice(newPrice);
             }
+            redirectAttributes.addFlashAttribute("msg", "Мероприятие " + action.getNameAction() + " успешно создано!");
         } else {
             for(int i=0; i < prices.size(); i++ ) {
                 Price newPrice = new Price();
@@ -74,14 +78,16 @@ public class ActionController {
                 newPrice.setPrice(prices.get(i));
                 facadeService.getPriceService().addPrice(newPrice);
             }
-
+            redirectAttributes.addFlashAttribute("msg", "Мероприятие " + action.getNameAction() + " успешно создано!");
         }
+        return "redirect:index";
+        /*
         try {
+
             response.sendRedirect(request.getContextPath()+"/index");
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        //return
+        }*/
     }
     //edit_action_form
     @RequestMapping(value = "/edit_action_form", method = RequestMethod.GET)
@@ -96,21 +102,42 @@ public class ActionController {
     }
 
     @RequestMapping(value = "/edit_action", method = RequestMethod.GET)
-    public String editAction(HttpServletRequest request, HttpServletResponse response,Model map) {
+    public String editAction(@ModelAttribute("editActionForm") ActionForm actionForm, HttpServletRequest request, HttpServletResponse response, Model map, RedirectAttributes redirectAttributes) {
+        String idAction = request.getParameter("idAction");
+        String name = request.getParameter("nameaction");//"Черноморец - Олимпик";//
+        String startDateTimeAction = request.getParameter("startdatetimeaction").replace("T"," ")+":00";//"2014-07-26 19:00:00";//Timestamp startDateTimeAction;
+        String endDateTimeAction = request.getParameter("enddatetimeaction").replace("T"," ")+":00";
+        String timelimitbooking = "2014-07-26 "+request.getParameter("timelimitbooking")+":00";
+        Boolean isNewPrices = Boolean.valueOf(request.getParameter("isNewPrices"));
+        List<BigDecimal> prices = actionForm.getPrices();
+        Action action1 = facadeService.getActionService().getAction(Integer.parseInt(idAction));
+        action1.setNameAction(name);
+        action1.setStartDateTimeAction(Timestamp.valueOf(startDateTimeAction));
+        action1.setEndDateTimeAction(Timestamp.valueOf(endDateTimeAction));
+        action1.setTimeLimitBooking(Timestamp.valueOf(timelimitbooking));
+
+        facadeService.getActionService().editAction(action1);
+        if(isNewPrices==true) {
+            List<Price> defaultPrices = facadeService.getPriceService().getPrices(action1.getId());//default actionID = 1
+            if(defaultPrices.size()==prices.size()) {
+                for(int i=0; i < prices.size(); i++ ) {
+                    defaultPrices.get(i).setPrice(prices.get(i));
+                    facadeService.getPriceService().editPrice(defaultPrices.get(i));
+                }
+            }
+        }
+
+        redirectAttributes.addFlashAttribute("msg", "Мероприятие " + action1.getNameAction() + " успешно отредактировано!");
+
         return "redirect:index";
     }
 
-
-
-
-    //removeaction
     @RequestMapping(value = "/remove_action", method = RequestMethod.GET)
-    public String removeAction(HttpServletRequest request, HttpServletResponse response,Model map) {
+    public String removeAction(HttpServletRequest request, HttpServletResponse response,Model map,RedirectAttributes redirectAttributes) {
         String idAction = request.getParameter("id_action");
         facadeService.getActionService().makeNotActiveAction(Integer.parseInt(idAction));
-        //facadeService.getActionService().
-       // List<Price> defaultPrices = facadeService.getPriceService().getPrices(1);//1 default action, get default prices
-       // map.addAttribute("defaultPrices",defaultPrices);
+        Action action1 = facadeService.getActionService().getAction(Integer.parseInt(idAction));
+        redirectAttributes.addFlashAttribute("msg", "Мероприятие " + action1.getNameAction() + " успешно добавлено в архив!");
         return "redirect:index";
     }
 }

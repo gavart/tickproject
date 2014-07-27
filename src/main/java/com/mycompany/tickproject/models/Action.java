@@ -3,8 +3,6 @@ package com.mycompany.tickproject.models;
 
 
 import javax.persistence.*;
-import java.sql.Time;
-import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
@@ -17,7 +15,9 @@ public class Action {
     //properties
     private int id;
     private String nameAction;
-    private Timestamp dateTimeAction;
+    private Timestamp startDateTimeAction;
+    private Timestamp endDateTimeAction;
+    private Timestamp timeLimitBooking;
     private Stadium stadium;
     private boolean isActive;
 
@@ -34,9 +34,19 @@ public class Action {
         return this.nameAction;
     }
 
-    @Column(name = "date_time_action")
-    public Timestamp getDateTimeAction() {
-        return this.dateTimeAction;
+    @Column(name = "start_date_time_action")
+    public Timestamp getStartDateTimeAction() {
+        return this.startDateTimeAction;
+    }
+
+    @Column(name = "end_date_time_action")
+    public Timestamp getEndDateTimeAction() {
+        return endDateTimeAction;
+    }
+
+    @Column(name = "time_limit_booking")
+    public Timestamp getTimeLimitBooking() {
+        return timeLimitBooking;
     }
 
     @ManyToOne
@@ -51,7 +61,6 @@ public class Action {
     }
 
 
-
     //setters
     public void setId(int id) {
         this.id = id;
@@ -61,8 +70,16 @@ public class Action {
         this.nameAction = nameAction;
     }
 
-    public void setDateTimeAction(Timestamp dateTimeAction) {
-        this.dateTimeAction = dateTimeAction;
+    public void setStartDateTimeAction(Timestamp dateTimeAction) {
+        this.startDateTimeAction = dateTimeAction;
+    }
+
+    public void setEndDateTimeAction(Timestamp endDateTimeAction) {
+        this.endDateTimeAction = endDateTimeAction;
+    }
+
+    public void setTimeLimitBooking(Timestamp timeLimitBooking) {
+        this.timeLimitBooking = timeLimitBooking;
     }
 
     public void setStadium(Stadium stadium) {

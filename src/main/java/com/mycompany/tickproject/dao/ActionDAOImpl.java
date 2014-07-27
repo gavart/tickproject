@@ -83,7 +83,7 @@ public class ActionDAOImpl implements ActionDAO {
     @Override
     public List<Action> getActions() {
         Session session = sessionFactory.getCurrentSession();
-        List<Action> actionList = (List<Action>) session.createSQLQuery("SELECT * FROM Actions WHERE isActive=true ORDER BY date_time_action").addEntity(Action.class).list();
+        List<Action> actionList = (List<Action>) session.createSQLQuery("SELECT * FROM Actions WHERE isActive=true ORDER BY start_date_time_action").addEntity(Action.class).list();
         return actionList;
     }
 

@@ -44,6 +44,19 @@ public class CustomerDAOImpl implements CustomerDAO {
         return customer;
     }
 
+    /**
+     * This method gets an object from the database by name,lastName and returns an object of {@link com.mycompany.tickproject.models.Customer}
+     *
+     * @param name     field an object of {@link com.mycompany.tickproject.models.Customer#firstName}
+     * @param lastName field an object of {@link com.mycompany.tickproject.models.Customer#lastName}
+     * @return an object of {@link com.mycompany.tickproject.models.Customer}
+     */
+    @Override
+    public Customer getCustomerByNameLastName(String name, String lastName) {
+        Session session = sessionFactory.getCurrentSession();
+        Customer customer = (Customer) session.createSQLQuery("SELECT * FROM Customers WHERE first_name='"+name+"' AND last_name ='"+lastName+"' Limit 1").addEntity(Customer.class).uniqueResult();
+        return customer;
+    }
 
 
     /** This method gets an object from the database by id and edit information about {@link com.mycompany.tickproject.models.Customer}

@@ -138,6 +138,41 @@ public class RowAndSeatController {
         facadeService.getTicketService().sellTicket(ticket);*/
         return "OK";
     }
+    /*
+    @RequestMapping(value = "/reserveseats", method = RequestMethod.POST)
+    public @ResponseBody String reserveSeat(HttpServletRequest request, HttpServletResponse response,Model map) {
+        int actionID = Integer.parseInt(request.getParameter("actionID"));
+        String[] rowandseatIDs = request.getParameterValues("rowandseatsID[]");
+        String customerName = "";
+        String customerLastName = "";
+
+        Customer customer = new Customer();
+        customer.setFirstName(customerName);
+        customer.setLastName(customerLastName);
+        customer.setPhoneNumber("0");
+        facadeService.getCustomerService().addCustomer(customer);
+        customer = facadeService.getCustomerService().getCustomerByNameLastName(customerName,customerLastName);
+        for(int i=0; i < rowandseatIDs.length; i++) {
+            RowAndSeat rowAndSeat = facadeService.getRowAndSeatService().getRowAndSeat(Integer.parseInt(rowandseatIDs[i]));
+            Action action = facadeService.getActionService().getAction(actionID);
+            Status status = new Status();
+            status.setId(2);// 2 = booked
+            Price price = facadeService.getPriceService().getActualPrice(rowAndSeat.getSectionOfStadium().getId(),actionID);
+
+            Ticket ticket = new Ticket();
+            ticket.setSectionOfStadium(rowAndSeat.getSectionOfStadium());
+            ticket.setStadium(action.getStadium());
+            ticket.setRowAndSeat(rowAndSeat);
+            ticket.setAction(action);
+            ticket.setStatus(status);
+            ticket.setCustomer(customer);
+            ticket.setPrice(price);
+            facadeService.getTicketService().reserveTicket(ticket);
+        }
+
+        return "OK";
+    }
+    */
 
     @RequestMapping(value = "/showseats", method = RequestMethod.GET)
     public String showRowsAndSeats(HttpServletRequest request, HttpServletResponse response,Model map) {

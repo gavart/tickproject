@@ -24,11 +24,10 @@
                 <button class="btn btn-primary" id="clear_pick" type="button">Отменить выбор</button>
                 <button class="btn btn-primary" id="sell" type="submit">Продать</button>
                 <button class="btn btn-primary btn" data-toggle="modal" data-target="#myModal" id="booking" type="submit">Бронь</button>
-                <button class="btn btn-primary" id="return_seats" type="submit">Освободить</button>
+                <button class="btn btn-primary" id="return_seats" type="submit">Вернуть в продажу</button>
             </div>
         </div>
     </div><!--content-->
 <jsp:include page="dialog_booking.jsp" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/td.js" charset="UTF-8"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/modal.js" charset="UTF-8"></script>
 <jsp:include page="footer.jsp" />

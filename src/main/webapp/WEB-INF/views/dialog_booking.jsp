@@ -15,18 +15,25 @@
                 <h4 class="modal-title" id="myModalLabel">Новая бронь</h4>
             </div>
             <div class="modal-body">
-                <input type="text" class="input-medium" placeholder="Введите ФИО">
-                <input type="text" class="input-medium" placeholder="Номер телефона">
+                <input type="text" class="input-medium" placeholder="Фамилия">
+                <input type="text" class="input-medium" placeholder="Имя">
+                <div><p>Сумма: <span></span></p></div>
+                <table class="table table-hover tickInfo">
+                    <thead>
+                    <tr>
+                        <td>№</td><td>ряд</td><td>место</td><td>цена</td><td>действие</td>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                <table class="table table-hover">
-                    <td>id</td><td>ряд</td><td>место</td><td>цена</td><td>действие</td>
-                    <tr></tr>
+                    </tbody>
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                <button type="button" id="modalCancel" class="btn btn-default" data-dismiss="modal">Отменить бронь</button>
                 <button type="button" class="btn btn-primary">Забронировать</button>
             </div>
+            <script type="text/javascript" src="${pageContext.request.contextPath}/js/booking.js" charset="UTF-8"></script>
         </div>
     </div>
 </div>

@@ -15,7 +15,33 @@ $(document).ready(function() {
 
     $('#booking').on('click', function(){
         var checkedElements = $('td.checked');
-        checkedElements.removeClass('active').removeClass('checked').addClass('booked');
+        var summ = 0;
+        var  bookedTbody = $("table.tickInfo tbody").empty();
+        $.each(checkedElements, function(index, valueElement){
+            var rowText = $(valueElement).attr('rowText');
+            var seattext = $(valueElement).attr('seattext');
+            var price = parseFloat($(valueElement).attr('priceseat'));
+            var number = index + 1;
+            var rowAndSeatID = $(valueElement).attr('rowandseatid');
+            summ += price;
+            $(bookedTbody).append('<tr class="trTemplate" rowAndSeatID=\"'+rowAndSeatID+'\">'+'<td class="tempID">'+ number +'</td>'+'<td class="tempRow">'+ rowText +'</td>'+'<td class="tempPlace">'+ seattext +'</td>'+'<td class="tempPrice">'+ price +'</td>'+'<td class="tempA">удалить</td>'+'</tr>');
+        });
+        $('.modal-body p span').text(summ);
+
+        $('td.tempA').on('click',function(){
+            var seatID = $(this).parent().attr('rowandseatid');
+            checkSelection(seatID);
+            summ -= parseFloat($(this).attr('tempPrice'));
+            $('.modal-body p span').text(summ);
+            $(this).parent().remove();
+        });
+
+        $('#modalCancel').on('click',function(){
+            $('#select-plase-box td').removeClass('checked');
+            clearModal();
+            disableButton();
+        });
+        //checkedElements.removeClass('active').removeClass('checked').addClass('booked');
     });
 
     $('#sell').on('click', function(){
@@ -29,6 +55,10 @@ $(document).ready(function() {
         disableButton();
     });
 });
+function checkSelection(seatID){
+    $('#select-plase-box td[rowandseatid='+seatID+']').toggleClass('checked');
+}
+
 function onAjax(data) {
     alert(data);
 }
@@ -57,6 +87,7 @@ function validSelection(arrayElements){
     else if ($(arrayElements).hasClass('sold'))
         {
             disableButton();
+            $('#return_seats').removeAttr('disabled');
         }
     else if ($(arrayElements).hasClass('booked'))
     {
@@ -66,15 +97,29 @@ function validSelection(arrayElements){
     else
         {
             enableButton();
+            $('#return_seats').attr('disabled', true);
         }
 }
 function disableButton(){
     $('#sell').attr('disabled', true);
     $('#booking').attr('disabled', true);
-    /*added code for div massage*/
-    console.log('disabled button with id #sell and #booking');
+    $('#return_seats').attr('disabled', true);
 }
 function enableButton(){
     $('#sell').removeAttr('disabled');
     $('#booking').removeAttr('disabled');
+    $('#return_seats').removeAttr('disabled');
 }
+$('myModal').on('hidden', function(){
+    clearModal();
+});
+$('myModal').on('show', function(){
+    clearModal();
+});
+function clearModal(){
+    $("table.tickInfo tbody").empty();
+    $('.modal-body input').each(function(){
+        $(this).val('');
+    });
+    $('.modal-body p span').text(0);
+};

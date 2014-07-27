@@ -47,13 +47,19 @@ public class PriceDAOImpl implements PriceDAO {
     /**
      * This method gets an object from the database by id and edit information about {@link com.mycompany.tickproject.models.Price}
      *
-     * @param sectionId id an object of {@link com.mycompany.tickproject.models.SectionOfStadium}
-     * @param actionId  id an object of {@link com.mycompany.tickproject.models.Action}
+     * @param price an object of {@link com.mycompany.tickproject.models.Price}
      */
     @Override
-    public void editPrice(int sectionId, int actionId) {
-
+    public void editPrice(Price price) {
+        Session session = null;
+        try {
+            session = sessionFactory.getCurrentSession();
+            session.update(price);
+        } catch (HibernateException he) {
+            he.printStackTrace();
+        }
     }
+
 
     /**
      * This method get list with objects from the database by action id and edit information about {@link com.mycompany.tickproject.models.Price}

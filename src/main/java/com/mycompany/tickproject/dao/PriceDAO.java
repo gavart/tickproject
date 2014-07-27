@@ -21,12 +21,11 @@ public interface PriceDAO {
      */
     public void addPrices(List<Price> prices);
 
-    /** This method gets an object from the database by id and edit information about {@link com.mycompany.tickproject.models.Price}
+    /** This method update an object information about {@link com.mycompany.tickproject.models.Price} in database
      *
-     * @param sectionId id an object of {@link com.mycompany.tickproject.models.SectionOfStadium}
-     * @param actionId id an object of {@link com.mycompany.tickproject.models.Action}
+     * @param price an object of {@link com.mycompany.tickproject.models.Price}
      */
-    public void editPrice(int sectionId, int actionId);
+    public void editPrice(Price price);
 
     /** This method get list with objects from the database by action id and edit information about {@link com.mycompany.tickproject.models.Price}
      *

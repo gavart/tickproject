@@ -71,7 +71,7 @@ $(document).ready(function() {
                 var lastName = $('.modal-body input.lastName').val();
                 var firstName = $('.modal-body input.firstName').val();
                 sendToServer(2,rowandseatsID,firstName,lastName,'/sellseats');
-                $('#select-plase-box td.checked').addClass('booked').removeClass('active').removeClass('checked');
+                $('#select-plase-box td.checked').removeClass('active').removeClass('checked').addClass('booked');
                 disableButton();
             }
             else
@@ -119,20 +119,21 @@ $(document).ready(function() {
         $('button#modalsell').hide();
     }
     $('#return_seats').on('click', function(){
-        var customerid = Array();
+        var arraySendToServer = Array();
+        //arraySendToServer
         var arrayElemets = $('#select-plase-box td.checked');
         if ($(arrayElemets).hasClass('booked'))
         {
             $.each(arrayElemets, function(){
-                customerid.push($(this).attr('customerid'));
+                arraySendToServer.push($(this).attr('customerid'));
 
             });
-            customerid = jQuery.unique(customerid);
-            console.log(customerid);
-            console.log(customerid[0]);
-            if (customerid.length == 1)
+            arraySendToServer = jQuery.unique(arraySendToServer);
+            console.log(arraySendToServer);
+            console.log(arraySendToServer[0]);
+            if (arraySendToServer.length == 1)
             {
-                var elementList = $('#select-plase-box td[customerid='+customerid[0]+']').removeClass('checked').toggleClass('checked');
+                var elementList = $('#select-plase-box td[customerid='+arraySendToServer[0]+']').removeClass('checked').toggleClass('checked');
                 bokkingModalShow();
                 $('button#modalBooking').hide();
                 generateTable(elementList, 0);
@@ -140,7 +141,7 @@ $(document).ready(function() {
                     url: URL+"/getcustomer",
                     type: 'POST',
                     dataType: 'text',
-                    data: {"customerid":customerid[0]},
+                    data: {"customerid":arraySendToServer[0]},
                     headers:'Content-Type: text/html; charset=utf-8',
                     success: function(data){
                         console.log(data);
@@ -155,23 +156,6 @@ $(document).ready(function() {
                         alert("error: "+data+" status: "+status+" er:"+er);
                     }
                 });
-                /*
-                $.post(URL+'/getcustomer',
-                    {"customerid": customerid[0]},
-                    function(data){
-                        var fio = Array();
-                        fio = split(',',data);
-                        console.log(fio);
-                        $('.modal-body input.lastName').val(fio[0]);
-                        $('.modal-body input.firstName').val(fio[1]);
-                        $('#myModal').modal('show');
-                    }
-                );
-                if (statusID == 2)
-                {
-                    $('#modalCancel').click();
-                }*/
-
                 $('#myModal').modal('show');
             }
             else
@@ -182,11 +166,10 @@ $(document).ready(function() {
         else
         {
             $.each(arrayElemets, function(){
-                customerid.push($(this).attr('rowandseatid'));
+                arraySendToServer.push($(this).attr('rowandseatid'));
             });
+            sendToServer('', arraySendToServer,'','','/unreserve');
         }
-        //console.log(rowandseatsID);
-        //sendToServer('', rowandseatsID,'','','/unreserve');
     });
     $('#editBooking').on('click', function(){
         var customerID = $('#select-plase-box td.checked').first().attr('customerid');
@@ -197,7 +180,7 @@ $(document).ready(function() {
         });
         $(checkElements).removeClass('booked').addClass('active');
         console.log(rowandseatsID);
-        //sendToServer('', rowandseatsID,'','','/unreserve');
+        sendToServer('', rowandseatsID,'','','/unreserve');
     });
 });
 

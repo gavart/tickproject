@@ -30,9 +30,10 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" id="modalCancel" class="btn btn-default" data-dismiss="modal">Отменить бронь</button>
-                <button type="button" id="editBooking" class="btn btn-default">Сохранить изменения</button>
+                <button type="button" id="modalCancel" class="btn btn-default" data-dismiss="modal">Отменить заказ</button>
+                <button type="button" id="editBooking" class="btn btn-primary">Сохранить изменения</button>
                 <button type="button" id="modalBooking" class="btn btn-primary">Забронировать</button>
+                <button type="button" id="modalsell" class="btn btn-primary">Продать</button>
             </div>
             <script type="text/javascript" src="${pageContext.request.contextPath}/js/booking.js" charset="UTF-8"></script>
         </div>

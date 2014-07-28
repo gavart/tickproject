@@ -22,7 +22,7 @@
             </table>
             <div class="div-button">
                 <button class="btn btn-primary" id="clear_pick" type="button">Отменить выбор</button>
-                <button class="btn btn-primary" id="sell" type="submit">Продать</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="sell" type="submit">Продать</button>
                 <button class="btn btn-primary btn" data-toggle="modal" data-target="#myModal" id="booking" type="submit">Бронь</button>
                 <button class="btn btn-primary" id="return_seats" type="submit">Вернуть в продажу</button>
             </div>

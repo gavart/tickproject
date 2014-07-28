@@ -2,6 +2,8 @@ package com.mycompany.tickproject.service;
 
 import com.mycompany.tickproject.models.Customer;
 
+import java.util.List;
+
 /**
  * Created by apple on 26.07.14.
  */
@@ -32,4 +34,9 @@ public interface CustomerService {
      * @param customer an object of {@link com.mycompany.tickproject.models.Customer}
      */
     public void editCustomer(Customer customer);
+
+
+    public List<Customer> findCustomerByNameLastName(String firstName,String lastName);
+
+
 }

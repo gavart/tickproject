@@ -38,7 +38,7 @@ public class IndexController {
     }
     
     @RequestMapping(value="/index",method = RequestMethod.GET)  
-    protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("msg") final String msg, ModelAndView modelAndView,final RedirectAttributes redirectAttributes) throws Exception {
+    protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("msg") final String msg, @ModelAttribute("typemsg") final String typemsg, ModelAndView modelAndView,final RedirectAttributes redirectAttributes) throws Exception {
         //LOGGER.debug("Index Controller page open.");
         Generation generation = new Generation();
 
@@ -53,6 +53,7 @@ public class IndexController {
         }*/
         if(msg!=null) {
             modelAndView.addObject("msg",msg);
+            modelAndView.addObject("typemsg",typemsg);
         }
         modelAndView.addObject("actionListString", generation.generateActions(actionList,contextPath));
         //LOGGER.debug("Index Controller page close.");

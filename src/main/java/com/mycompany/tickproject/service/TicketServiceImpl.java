@@ -19,6 +19,12 @@ public class TicketServiceImpl implements TicketService {
 
     @Transactional
     @Override
+    public Ticket getTicket(int actionID, int rowAndSeatID) {
+        return facadeDAO.getTicketDAO().getTicket(actionID,rowAndSeatID);
+    }
+
+    @Transactional
+    @Override
     public List<Ticket> getTickets(int actionID, int sectionID) {
         return facadeDAO.getTicketDAO().getTickets(actionID,sectionID);
     }
@@ -35,12 +41,38 @@ public class TicketServiceImpl implements TicketService {
     }
 
     /**
+     * This method sells a ticket through update exist item in database an object of {@link com.mycompany.tickproject.models.Ticket}. Change {@link com.mycompany.tickproject.models.Ticket#status} to id=3 and status SELLED
+     *
+     * @param ticket an object of {@link com.mycompany.tickproject.models.Ticket}
+     */
+    @Transactional
+    @Override
+    public void sellTicketThroughUpdate(Ticket ticket) {
+        facadeDAO.getTicketDAO().sellTicketThroughUpdate(ticket);
+    }
+
+    /**
      * This method reserves a ticket
      *
      * @param ticket an object of {@link com.mycompany.tickproject.models.Ticket}
      */
+    @Transactional
     @Override
     public void reserveTicket(Ticket ticket) {
         facadeDAO.getTicketDAO().reserveTicket(ticket);
     }
+
+    /**
+     * This method unreserve and return in sale
+     *
+     * @param actionID     id an object of {@link com.mycompany.tickproject.models.Action}
+     * @param rowAndSeatID id an object of {@link com.mycompany.tickproject.models.RowAndSeat}
+     */
+    @Transactional
+    @Override
+    public void unreserveAndReturnInSale(int actionID, int rowAndSeatID) {
+        facadeDAO.getTicketDAO().unreserveAndReturnInSale(actionID,rowAndSeatID);
+    }
+
+
 }

@@ -7,6 +7,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by apple on 26.07.14.
  */
@@ -72,5 +74,12 @@ public class CustomerDAOImpl implements CustomerDAO {
         } catch (HibernateException he) {
             he.printStackTrace();
         }
+    }
+
+    @Override
+    public List<Customer> findCustomerByNameLastName(String firstName, String lastName) {
+        Session session = sessionFactory.getCurrentSession();
+        List<Customer> customers = (List<Customer>) session.createSQLQuery("Select * FROM Customers Where first_name LIKE '%"+firstName+"%' AND last_name LIKE '%"+lastName+"%' LIMIT 10").addEntity(Customer.class).list();
+        return customers;
     }
 }

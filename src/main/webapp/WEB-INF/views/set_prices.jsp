@@ -7,15 +7,22 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div id="setPricesDIV" class="hide">
+<table id="setPricesDIV" class="pricing-sectors-table hide">
+    <tr>
     <c:forEach items="${defaultPrices}" var="defaultPrice" varStatus="loop">
-        <div class="setPrice">Сектор
-            <span id="section[${loop.index}]" data-sectionid="${defaultPrice.sectionOfStadium.id}">${defaultPrice.sectionOfStadium.name}</span>
+        <c:if test="${loop.index>1&&(loop.index+1)%7==1}">
+    </tr>
+    <tr>
+        </c:if>
+
+        <td class = "${sectionsColor[loop.index]}">
+            <div id="section[${loop.index}]" class = "sector-number">${defaultPrice.sectionOfStadium.name}</div>
             <input type="hidden" value="${defaultPrice.sectionOfStadium.id}" name="sectionsId[${loop.index}]" id="sectionsId[${loop.index}]" />
             <input type="hidden" value="${defaultPrice.action.id}" name="actionsId[${loop.index}]" id="actionsId[${loop.index}]" />
-            <input type="text" class="input-mini prices" placeholder="${defaultPrice.price}" id="prices[${loop.index}]" name="prices[${loop.index}]" value="${defaultPrice.price}" size="10"  />
-        </div>
-    </c:forEach>
+            <div class = "quad-content">
+                <input type = "text" placeholder="${defaultPrice.price}" name="prices[${loop.index}]" value="${defaultPrice.price}" maxlength = "7">
 </div>
-
-<!--onkeyup="return proverka(this);" onchange="return proverka(this);"-->
+</td>
+</c:forEach>
+</tr>
+</table>

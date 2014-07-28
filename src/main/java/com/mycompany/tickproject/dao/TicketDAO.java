@@ -26,7 +26,7 @@ public interface TicketDAO {
      */
     public List<Ticket> getTickets(int actionID, int sectionID);
     public List<Object[]> getTicketsInListObjects(int actionID, int sectionID);
-    //public Ticket getTicket(int actionID, int sectionID, int rowAndSeatID);
+    public Ticket getTicket(int actionID, int rowAndSeatID);
 
     /** This method gets reserved ticket on a certain customer from database and return an object of {@link com.mycompany.tickproject.models.Ticket}
      *
@@ -35,11 +35,17 @@ public interface TicketDAO {
      */
     public Ticket findTicketByCustomer(int customerID);
 
-    /** This method sells a ticket by id an object of {@link com.mycompany.tickproject.models.Ticket}. Change {@link com.mycompany.tickproject.models.Ticket#status} to id=3 and status SELLED
+    /** This method sells a ticket an object of {@link com.mycompany.tickproject.models.Ticket}. Change {@link com.mycompany.tickproject.models.Ticket#status} to id=3 and status SELLED
      *
      * @param ticket an object of {@link com.mycompany.tickproject.models.Ticket}
      */
     public void sellTicket(Ticket ticket);
+
+    /** This method sells a ticket through update exist item in database an object of {@link com.mycompany.tickproject.models.Ticket}. Change {@link com.mycompany.tickproject.models.Ticket#status} to id=3 and status SELLED
+     *
+     * @param ticket an object of {@link com.mycompany.tickproject.models.Ticket}
+     */
+    public void sellTicketThroughUpdate(Ticket ticket);
 
     /** This method reserves a ticket
      *
@@ -47,6 +53,12 @@ public interface TicketDAO {
      */
     public void reserveTicket(Ticket ticket);
 
+    /** This method unreserve and return in sale
+     *
+     * @param actionID id an object of {@link com.mycompany.tickproject.models.Action}
+     * @param rowAndSeatID id an object of {@link com.mycompany.tickproject.models.RowAndSeat}
+     */
+    public void unreserveAndReturnInSale(int actionID, int rowAndSeatID);
 
 }
 

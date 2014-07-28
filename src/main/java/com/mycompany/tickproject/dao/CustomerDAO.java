@@ -2,6 +2,8 @@ package com.mycompany.tickproject.dao;
 
 import com.mycompany.tickproject.models.Customer;
 
+import java.util.List;
+
 /** This interface provide methods that are used to work with the entity {@link com.mycompany.tickproject.models.Customer}
  * @author jenias
  * @version 1.0, 08/07/14
@@ -33,4 +35,7 @@ public interface CustomerDAO {
      * @param customer an object of {@link com.mycompany.tickproject.models.Customer}
      */
     public void editCustomer(Customer customer);
+
+
+    public List<Customer> findCustomerByNameLastName(String firstName,String lastName);
 }

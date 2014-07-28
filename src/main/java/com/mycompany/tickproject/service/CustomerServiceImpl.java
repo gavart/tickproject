@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by apple on 26.07.14.
  */
@@ -60,4 +62,17 @@ public class CustomerServiceImpl implements CustomerService {
     public void editCustomer(Customer customer) {
         facadeDAO.getCustomerDAO().editCustomer(customer);
     }
+    @Transactional
+    @Override
+    public List<Customer> findCustomerByNameLastName(String firstName, String lastName) {
+        return facadeDAO.getCustomerDAO().findCustomerByNameLastName(firstName,lastName);
+    }
+
+    /**
+     * This method unreserve and return in sale
+     *
+     * @param actionID     id an object of {@link com.mycompany.tickproject.models.Action}
+     * @param rowAndSeatID id an object of {@link com.mycompany.tickproject.models.RowAndSeat}
+     */
+
 }

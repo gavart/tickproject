@@ -13,88 +13,59 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="header.jsp" />
 <jsp:include page="menu.jsp" />
-    <div id="content" class="min-height-content">
-        <div class="transparent-div">
+<div style = "clear:both"></div>
 
-            <form class="form-horizontal" id="form_add_action" modelAttribute="addActionForm" method="get" action="${pageContext.request.contextPath}/addaction">
-                <fieldset>
-                    <div id="legend">
-                        <legend style="text-align:center;">Информация о новом мероприятии</legend>
-                    </div>
-                    <div id="errmsg"></div>
-                    <div class="control-group">
-                        <!-- Name Action -->
-                        <div class="controls">
-                            <input type="text" id="nameaction" name="nameaction" placeholder="Название мероприятия" class="input-xxlarge">
-                            <!--<p class="help-block">Пожалуйста, напишите название мероприятия</p>-->
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <!-- Date and Time Action-->
-                        <div class="controls">
-                            <%
+<div id="content" class="min-height-content">
+<div class = "transparent-div">
+<form class="form-horizontal" id="form_add_action" method="get" action="${pageContext.request.contextPath}/addaction">
+<fieldset>
+<div id="legend">
+    <legend class = "title-font">Регистрация нового мероприятия</legend>
+</div>
+<div id="errmsg"></div>
+
+<div class = "control-group">
+    <div class="left-side-block">
+        <p class="input-title title-font">Название Мероприятия</p>
+        <input tabindex = "4" type="text" id="nameaction" name="nameaction" class="input-xxlarge">
+        <p class="input-title title-font">Начало Мероприятия</p>
+        <%
+            SimpleDateFormat ftDate = new SimpleDateFormat ("yyyy-MM-dd");
+            SimpleDateFormat ftTime = new SimpleDateFormat ("HH:mm");
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.HOUR_OF_DAY, 2);
+
+            out.println("<input type=\"datetime-local\" id=\"startdatetimeaction\" name=\"startdatetimeaction\" class=\"input-xxlarge\" value=\""+ftDate.format(cal.getTime())+"T"+ftTime.format(cal.getTime())+"\" min=\""+ftDate.format(cal.getTime())+"T"+ftTime.format(cal.getTime())+"\" >");%>
+    </div>
+
+    <div class="right-side-block">
+        <p class="input-title title-font">Таймаут брони</p>
+        <%
+            Action action = (Action) request.getAttribute("defaultAction");
+
+            out.println("<input tabindex = \"7\" type=\"time\" id=\"timelimitbooking\" name=\"timelimitbooking\" class=\"input-xxlarge\" value=\""+ftTime.format(action.getTimeLimitBooking())+"\" min=\"00:01\" >");%>
+        <p class="input-title title-font">Конец Мероприятия</p>
+        <%
+            Calendar cal2 = cal;
+            cal2.add(Calendar.MINUTE, 30);
+
+            out.println("<input type=\"datetime-local\" id=\"enddatetimeaction\" name=\"enddatetimeaction\" class=\"input-xxlarge\" value=\""+ftDate.format(cal2.getTime())+"T"+ftTime.format(cal2.getTime())+"\" min=\""+ftDate.format(cal2.getTime())+"T"+ftTime.format(cal2.getTime())+"\" >");%>
+    </div>
+</div>
+<jsp:include page="set_prices.jsp" />
+
+<div class = "confirm-block">
+    <label class="checkbox title-font" for = "isNewPrices">Установить новые цены
+        <input tabindex = "8" type="checkbox" value="true" id="isNewPrices" name="isNewPrices">
+    </label>
+    <button class="confirm-button title-font" id="addActionButton" type="submit">Готово</button>
+</div>
+</fieldset>
+</form>
 
 
-                                //
-                                SimpleDateFormat ftDate = new SimpleDateFormat ("yyyy-MM-dd");
-                                SimpleDateFormat ftTime = new SimpleDateFormat ("HH:mm");
-                                Calendar cal = Calendar.getInstance();
-                                cal.add(Calendar.HOUR_OF_DAY, 2);
-
-                                out.println("<input type=\"datetime-local\" id=\"startdatetimeaction\" name=\"startdatetimeaction\" class=\"input-xxlarge\" value=\""+ftDate.format(cal.getTime())+"T"+ftTime.format(cal.getTime())+"\" min=\""+ftDate.format(cal.getTime())+"T"+ftTime.format(cal.getTime())+"\" >");%>
-
-                            <!--<input type="datetime-local" id="datetimeaction" name="datetimeaction" placeholder="Дата и время мероприятия" class="input-xxlarge">-->
-                            <p class="help-block">Дата и время начала мероприятия</p>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <!-- Date and Time Action-->
-                        <div class="controls">
-                            <%
-
-
-                                //
-                                //SimpleDateFormat ftDate = new SimpleDateFormat ("yyyy-MM-dd");
-                                //SimpleDateFormat ftTime = new SimpleDateFormat ("HH:mm");
-                                Calendar cal2 = cal;
-                                cal2.add(Calendar.MINUTE, 30);
-
-                                out.println("<input type=\"datetime-local\" id=\"enddatetimeaction\" name=\"enddatetimeaction\" class=\"input-xxlarge\" value=\""+ftDate.format(cal2.getTime())+"T"+ftTime.format(cal2.getTime())+"\" min=\""+ftDate.format(cal2.getTime())+"T"+ftTime.format(cal2.getTime())+"\" >");%>
-
-                            <!--<input type="datetime-local" id="datetimeaction" name="datetimeaction" placeholder="Дата и время мероприятия" class="input-xxlarge">-->
-                            <p class="help-block">Дата и время завершения мероприятия</p>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <!-- Date and Time Action-->
-                        <div class="controls">
-                            <%
-                                Action action = (Action) request.getAttribute("defaultAction");
-
-                                out.println("<input type=\"time\" id=\"timelimitbooking\" name=\"timelimitbooking\" class=\"input-xxlarge\" value=\""+ftTime.format(action.getTimeLimitBooking())+"\" min=\"00:01\" >");%>
-
-                            <!--<input type="datetime-local" id="datetimeaction" name="datetimeaction" placeholder="Дата и время мероприятия" class="input-xxlarge">-->
-                            <p class="help-block">Время за которое отменяется бронь</p>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <!-- CheckBox and Button -->
-                        <div class="controls">
-                            <label class="checkbox">
-                                <input type="checkbox" value="true" id="isNewPrices" name="isNewPrices" /> установить новые цены
-                            </label>
-
-                            <jsp:include page="set_prices.jsp" />
-                            <button class="btn btn-primary" id="addActionButton" type="submit">Создать мероприятие</button>
-                        </div>
-                    </div>
-
-                </fieldset>
-            </form>
-
-        </div>
-    </div><!--content-->
+</div>
+</div><!--content-->
 
 
 <jsp:include page="footer.jsp" />

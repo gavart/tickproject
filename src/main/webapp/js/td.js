@@ -136,6 +136,26 @@ $(document).ready(function() {
                 bokkingModalShow();
                 $('button#modalBooking').hide();
                 generateTable(elementList, 0);
+                $.ajax({
+                    url: URL+"/getcustomer",
+                    type: 'POST',
+                    dataType: 'text',
+                    data: {"customerid":customerid[0]},
+                    headers:'Content-Type: text/html; charset=utf-8',
+                    success: function(data){
+                        console.log(data);
+                        var fio = Array();
+                        fio = data.split(',');
+                        console.log(fio);
+                        $('.modal-body input.lastName').val(fio[0]);
+                        $('.modal-body input.firstName').val(fio[1]);
+                        $('#myModal').modal('show');
+                    },
+                    error:function(data,status,er) {
+                        alert("error: "+data+" status: "+status+" er:"+er);
+                    }
+                });
+                /*
                 $.post(URL+'/getcustomer',
                     {"customerid": customerid[0]},
                     function(data){
@@ -150,7 +170,7 @@ $(document).ready(function() {
                 if (statusID == 2)
                 {
                     $('#modalCancel').click();
-                }
+                }*/
 
                 $('#myModal').modal('show');
             }

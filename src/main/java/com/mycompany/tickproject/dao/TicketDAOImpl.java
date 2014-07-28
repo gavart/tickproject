@@ -83,6 +83,13 @@ public class TicketDAOImpl implements TicketDAO {
         return ticketList;
     }
 
+    @Override
+    public Ticket getTicket(int actionID, int rowAndSeatID) {
+        Session session = sessionFactory.getCurrentSession();
+        Ticket ticket = (Ticket) session.createSQLQuery("SELECT * From Tickets Where row_and_seat_id = "+rowAndSeatID+"  AND action_id = " + actionID +" LIMIT 1").addEntity(Ticket.class).uniqueResult();
+        return ticket;
+    }
+
     /**
      * This method gets reserved ticket on a certain customer from database and return an object of {@link com.mycompany.tickproject.models.Ticket}
      *
@@ -111,6 +118,22 @@ public class TicketDAOImpl implements TicketDAO {
     }
 
     /**
+     * This method sells a ticket through update exist item in database an object of {@link com.mycompany.tickproject.models.Ticket}. Change {@link com.mycompany.tickproject.models.Ticket#status} to id=3 and status SELLED
+     *
+     * @param ticket an object of {@link com.mycompany.tickproject.models.Ticket}
+     */
+    @Override
+    public void sellTicketThroughUpdate(Ticket ticket) {
+        Session session = null;
+        try {
+            session = sessionFactory.getCurrentSession();
+            session.update(ticket);
+        } catch (HibernateException he) {
+            he.printStackTrace();
+        }
+    }
+
+    /**
      * This method reserves a ticket
      *
      * @param ticket an object of {@link com.mycompany.tickproject.models.Ticket}
@@ -124,6 +147,24 @@ public class TicketDAOImpl implements TicketDAO {
         } catch (HibernateException he) {
             he.printStackTrace();
         }
+    }
+
+    /**
+     * This method unreserve and return in sale
+     *
+     * @param actionID     id an object of {@link com.mycompany.tickproject.models.Action}
+     * @param rowAndSeatID id an object of {@link com.mycompany.tickproject.models.RowAndSeat}
+     */
+    @Override
+    public void unreserveAndReturnInSale(int actionID, int rowAndSeatID) {
+        Session session = null;
+        try {
+            session = sessionFactory.getCurrentSession();
+            session.createSQLQuery("DELETE FROM Tickets WHERE row_and_seat_id="+rowAndSeatID+" AND action_id="+actionID).executeUpdate();
+        } catch (HibernateException he) {
+            he.printStackTrace();
+        }
+        //DELETE FROM `Tickets` WHERE row_and_status_id= AND action_id=31
     }
 
 }

@@ -27,6 +27,11 @@ public class ActionController {
 
     @RequestMapping(value = "/add_action_form", method = RequestMethod.GET)
     public String addActionForm(HttpServletRequest request, HttpServletResponse response,Model map) {
+        String[] sectionsColor = {"orange-sector","yellow-sector","blue-sector","navy-sector","navy-sector","navy-sector","navy-sector",
+                "navy-sector","blue-sector","green-sector","green-sector","grass-sector","grass-sector","grass-sector",
+                "green-sector","green-sector","red-sector","burgundy-sector","burgundy-sector","brown-sector","burgundy-sector",
+                "burgundy-sector","red-sector","yellow-sector","orange-sector","vip-sector-a","vip-sector-d"};
+        map.addAttribute("sectionsColor",sectionsColor);
         List<Price> defaultPrices = facadeService.getPriceService().getPrices(1);//1 default action, get default prices
         map.addAttribute("defaultPrices",defaultPrices);
         Action defaultAction = facadeService.getActionService().getAction(1);
@@ -68,6 +73,8 @@ public class ActionController {
                 facadeService.getPriceService().addPrice(newPrice);
             }
             redirectAttributes.addFlashAttribute("msg", "Мероприятие " + action.getNameAction() + " успешно создано!");
+            redirectAttributes.addFlashAttribute("typemsg", "success");
+
         } else {
             for(int i=0; i < prices.size(); i++ ) {
                 Price newPrice = new Price();
@@ -79,6 +86,7 @@ public class ActionController {
                 facadeService.getPriceService().addPrice(newPrice);
             }
             redirectAttributes.addFlashAttribute("msg", "Мероприятие " + action.getNameAction() + " успешно создано!");
+            redirectAttributes.addFlashAttribute("typemsg", "success");
         }
         return "redirect:index";
         /*

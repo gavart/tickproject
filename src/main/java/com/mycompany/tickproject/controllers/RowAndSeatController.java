@@ -92,21 +92,32 @@ public class RowAndSeatController {
         String customerName = request.getParameter("firstName");
         String customerLastName = request.getParameter("lastName");
         String statusID =request.getParameter("statusID");
-        Customer customer = new Customer();
+        Customer customer=new Customer();
         if(Integer.parseInt(statusID)==2) {
+            //customer=new Customer();
             customer.setFirstName(customerName);
             customer.setLastName(customerLastName);
             customer.setPhoneNumber("0");
             facadeService.getCustomerService().addCustomer(customer);
             customer = facadeService.getCustomerService().getCustomerByNameLastName(customerName,customerLastName);
-            msg=customerLastName+" " + customerName + "успешно забронировал!";
+            msg="true";
         } else {
+            //customer=new Customer();
             customer.setId(1);//1 = default customer
-            msg="Операция продажи прошла успешно!";
+            msg="true";
+        }
+            boolean isAllSeatsFree =false;
+
+        for(int i=0; i < rowandseatIDs.length; i++) {
+            Ticket receivedTicket = facadeService.getTicketService().getTicket(actionID, Integer.parseInt(rowandseatIDs[i]));
+            if(receivedTicket==null) {
+                isAllSeatsFree = true;
+            } else {
+                isAllSeatsFree = false;
+            }
         }
 
-
-
+        if(isAllSeatsFree==true) {
             for(int i=0; i < rowandseatIDs.length; i++) {
                 RowAndSeat rowAndSeat = facadeService.getRowAndSeatService().getRowAndSeat(Integer.parseInt(rowandseatIDs[i]));
                 Action action = facadeService.getActionService().getAction(actionID);
@@ -122,8 +133,38 @@ public class RowAndSeatController {
                 ticket.setStatus(status);
                 ticket.setCustomer(customer);
                 ticket.setPrice(price);
-                facadeService.getTicketService().sellTicket(ticket);
+
+                Ticket receivedTicket = facadeService.getTicketService().getTicket(ticket.getAction().getId(),ticket.getRowAndSeat().getId());
+                if(Integer.parseInt(statusID)==2) {
+                    if(receivedTicket!=null) {
+                        facadeService.getTicketService().sellTicketThroughUpdate(ticket);
+                    } else {
+                        facadeService.getTicketService().sellTicket(ticket);
+                    }
+                } else {
+                    if(receivedTicket==null) {
+                        facadeService.getTicketService().sellTicket(ticket);
+                    } else {
+                        if(receivedTicket.getStatus().getId()==2) {
+                            ticket.setId(receivedTicket.getId());
+                            ticket.setCustomer(receivedTicket.getCustomer());
+                            facadeService.getTicketService().sellTicketThroughUpdate(ticket);
+                        } else {
+                            msg="false";
+                        }
+                    }
+                }
+
+                //if(Integer.parseInt(statusID)==2) {
+
+                //} else {
+
+                //}
+
             }
+        } else {
+            msg="false";
+        }
         return msg;
     }
 
@@ -256,5 +297,5 @@ public class RowAndSeatController {
         map.addAttribute("rowsAndSeats", generation.generateRowsAndSeatsFromTicketsList(ticketList1));//generation.generateRowsAndSeatsFromRowsAndSeatsList(facadeService.getRowAndSeatService().getRowsAndSeats(sectionID)));
         return "showseats";*/
     }
-
+    //unreserve mapping
 }

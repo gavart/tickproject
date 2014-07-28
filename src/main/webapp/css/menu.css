@@ -1,0 +1,41 @@
+nav{
+width:80%;
+height:45px;
+margin:0 auto;
+background-color:#F9F9F9;
+border-radius:0 0 50px 50px;
+box-shadow:
+	0 1px 8px rgba(50,50,50,0.7),
+	inset 0 -2px 5px rgba(40,40,40,0.6);
+}
+
+nav a{
+text-decoration:none;
+color:#777CA1;
+
+}
+
+header{
+float:left;
+margin-left:25px;
+font-weight:200;
+font-size:20px;
+}
+
+nav li{
+float:left;
+margin-top:10px;
+display:inline-block;
+}
+
+nav li a:hover{
+color:#FF9C00;
+}
+
+.divider-vertical{
+height: 40px;
+margin: 0px 15px;
+border-right: 1px solid #DDD;
+border-left: 1px solid #F2F2F2;
+}
+

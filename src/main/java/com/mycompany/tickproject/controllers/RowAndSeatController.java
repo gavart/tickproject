@@ -298,4 +298,23 @@ public class RowAndSeatController {
         return "showseats";*/
     }
     //unreserve mapping
+
+    @RequestMapping(value = "/unreserve", method = RequestMethod.POST)
+    public @ResponseBody String unreserveSeat(HttpServletRequest request, HttpServletResponse response,Model map) {
+        String msg="";
+        int actionID = Integer.parseInt(request.getParameter("actionID"));
+        String[] rowandseatIDs = request.getParameterValues("rowandseatsID[]");
+        int[] rowandseatIDsINT = new int[rowandseatIDs.length];
+        if(rowandseatIDs!=null) {
+            for(int i=0;i<rowandseatIDs.length;i++) {
+                rowandseatIDsINT[i]=Integer.parseInt(rowandseatIDs[i]);
+            }
+            facadeService.getTicketService().unreserveAndReturnInSale(actionID,rowandseatIDsINT);
+            msg="true";
+        } else {
+            msg="false";
+        }
+
+        return msg;
+    }
 }

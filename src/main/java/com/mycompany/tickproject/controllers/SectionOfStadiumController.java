@@ -85,8 +85,8 @@ public class SectionOfStadiumController {
         int actionId = Integer.parseInt(request.getParameter("idaction"));
         Generation generation = new Generation();
 
-        String contextPath = request.getContextPath();
         Action action = facadeService.getActionService().getAction(actionId);
+        String contextPath = request.getContextPath();
         map.addAttribute("actionString", generation.generateOneAction(action,contextPath));
         map.addAttribute("listSections", generation.generateSections(facadeService.getSectionOfStadiumService().getSectionsOfStadium(idstadium),contextPath,actionId)); //facadeService.getSectionOfStadiumService().getSectionsOfStadium(idstadium));//generation.generateSections(facadeService.getSectionOfStadiumService().getSectionsOfStadium(idstadium)));
         return "showsections";

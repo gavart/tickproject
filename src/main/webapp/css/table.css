@@ -1,0 +1,130 @@
+.sectors-table{
+
+	width:100%;
+	margin: 10px auto 0 auto;
+	border-spacing: 10px;
+
+}
+
+.sectors-table td{
+
+	width:13%;
+	height:0;
+	text-align: center;	
+	border-radius: 10px;
+	font:35px Helvetica, arial, serif;
+	color: #fff;
+	
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid rgba(0,0,0,0.5);
+    border-bottom: 3px solid rgba(0,0,0,0.5);
+ 
+    box-shadow: 
+        0 2px 8px rgba(0,0,0,0.5), /* Exterior Shadow */
+        inset 0 1px rgba(255,255,255,0.3), /* Top light Line */
+        inset 0 10px rgba(255,255,255,0.2), /* Top Light Shadow */
+        inset 0 10px 20px rgba(255,255,255,0.25), /* Sides Light Shadow */
+        inset 0 -15px 30px rgba(0,0,0,0.3); /* Dark Background */
+ 
+    -webkit-box-shadow: 
+        0 2px 8px rgba(0,0,0,0.5),
+        inset 0 1px rgba(255,255,255,0.3),
+        inset 0 10px rgba(255,255,255,0.2),
+        inset 0 10px 20px rgba(255,255,255,0.25),
+        inset 0 -15px 30px rgba(0,0,0,0.3);
+ 
+    -moz-box-shadow:
+        0 2px 8px rgba(0,0,0,0.5),
+        inset 0 1px rgba(255,255,255,0.3),
+        inset 0 10px rgba(255,255,255,0.2),
+        inset 0 10px 20px rgba(255,255,255,0.25),
+        inset 0 -15px 30px rgba(0,0,0,0.3);
+	
+	position:relative;
+	
+}
+
+.sectors-table td:before{
+
+content:"";
+display:block;
+padding-top:100%;
+
+}
+
+.quad-content{
+
+	position:  absolute;
+	top: 38%;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	
+}
+
+.red-sector{
+
+	background-color:#EA1D10;
+
+}
+
+.yellow-sector{
+	background-color:#F9E822;
+}
+
+
+
+.orange-sector{
+
+	background-color:#F09201;
+
+}
+
+.vip-sector-b{
+
+	background-color:#BE7712;
+
+}
+
+.vip-sector-a{
+
+	background-color:#AB4631;
+
+}
+
+.navy-sector{
+
+	background-color:#20235B;
+
+}
+
+.blue-sector{
+
+	background-color:#0A8ACB;
+
+}
+
+.green-sector{
+
+	background-color:#006B2F;
+
+}
+
+.grass-sector{
+
+	background-color:#003619;
+
+}
+
+.burgundy-sector{
+
+		background-color:#910919;
+	
+}
+
+.brown-sector{
+
+	background-color:#570912;
+
+}

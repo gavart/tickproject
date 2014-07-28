@@ -156,13 +156,20 @@ public class TicketDAOImpl implements TicketDAO {
      * @param rowAndSeatID id an object of {@link com.mycompany.tickproject.models.RowAndSeat}
      */
     @Override
-    public void unreserveAndReturnInSale(int actionID, int rowAndSeatID) {
+    public boolean unreserveAndReturnInSale(int actionID, int[] rowAndSeatID) {
         Session session = null;
         try {
-            session = sessionFactory.getCurrentSession();
-            session.createSQLQuery("DELETE FROM Tickets WHERE row_and_seat_id="+rowAndSeatID+" AND action_id="+actionID).executeUpdate();
+            for(int i=0;i<rowAndSeatID.length;i++)
+            {
+                if(getTicket(actionID,rowAndSeatID[i])!=null) {
+                    session = sessionFactory.getCurrentSession();
+                    session.createSQLQuery("DELETE FROM Tickets WHERE row_and_seat_id="+rowAndSeatID[i]+" AND action_id="+actionID).executeUpdate();
+                }
+            }
+            return true;
         } catch (HibernateException he) {
             he.printStackTrace();
+            return false;
         }
         //DELETE FROM `Tickets` WHERE row_and_status_id= AND action_id=31
     }

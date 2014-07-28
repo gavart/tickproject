@@ -56,9 +56,9 @@ public interface TicketDAO {
     /** This method unreserve and return in sale
      *
      * @param actionID id an object of {@link com.mycompany.tickproject.models.Action}
-     * @param rowAndSeatID id an object of {@link com.mycompany.tickproject.models.RowAndSeat}
+     * @param rowAndSeatIDs array with ids an object of {@link com.mycompany.tickproject.models.RowAndSeat}
      */
-    public void unreserveAndReturnInSale(int actionID, int rowAndSeatID);
+    public boolean unreserveAndReturnInSale(int actionID, int[] rowAndSeatIDs);
 
 }
 

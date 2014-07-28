@@ -62,16 +62,15 @@ public class TicketServiceImpl implements TicketService {
         facadeDAO.getTicketDAO().reserveTicket(ticket);
     }
 
-    /**
-     * This method unreserve and return in sale
+    /** This method unreserve and return in sale
      *
-     * @param actionID     id an object of {@link com.mycompany.tickproject.models.Action}
-     * @param rowAndSeatID id an object of {@link com.mycompany.tickproject.models.RowAndSeat}
+     * @param actionID id an object of {@link com.mycompany.tickproject.models.Action}
+     * @param rowAndSeatIDs array with ids an object of {@link com.mycompany.tickproject.models.RowAndSeat}
      */
     @Transactional
     @Override
-    public void unreserveAndReturnInSale(int actionID, int rowAndSeatID) {
-        facadeDAO.getTicketDAO().unreserveAndReturnInSale(actionID,rowAndSeatID);
+    public boolean unreserveAndReturnInSale(int actionID, int[] rowAndSeatIDs) {
+        return facadeDAO.getTicketDAO().unreserveAndReturnInSale(actionID,rowAndSeatIDs);
     }
 
 
